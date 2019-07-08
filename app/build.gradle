@@ -40,4 +40,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.0"
 }
