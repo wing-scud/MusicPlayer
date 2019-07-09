@@ -34,12 +34,12 @@ import androidx.room.PrimaryKey
 //歌曲
 @Entity(tableName = "song_table")
 data class Song(
-    @PrimaryKey val id: String,
-    @ColumnInfo(name = "song") val song: String,
-    @ColumnInfo(name = "singer") val singer: String,
-    @ColumnInfo(name = "duration") val duration: String,
-    @ColumnInfo(name = "path") val path: String,
-    @ColumnInfo(name = "size") val size: String)
+    @PrimaryKey var id: String,
+    @ColumnInfo(name = "song") var song: String,
+    @ColumnInfo(name = "singer") var singer: String,
+    @ColumnInfo(name = "duration") var duration: String,
+    @ColumnInfo(name = "path") var path: String,
+    @ColumnInfo(name = "size") var size: String)
 
 //歌单
 @Entity(foreignKeys = arrayOf(
@@ -50,7 +50,7 @@ data class Song(
 ,tableName = "song_list_table")
 
 data class SongList(
-    @PrimaryKey val id: String,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "song_id") val song_id: Int
+    @PrimaryKey var id: String,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "song_id") var song_id: Int
 )
