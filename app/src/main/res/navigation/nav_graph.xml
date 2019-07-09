@@ -6,7 +6,10 @@
     <fragment android:id="@+id/enterMusic" android:name="com.example.projectprepare1.ui.item.itemFragment"
               android:label="item_fragment" tools:layout="@layout/item_fragment">
         <action android:id="@+id/action_item_to_music" app:destination="@+id/music"/>
+        <action android:id="@+id/action_enterMusic_to_scanFragment" app:destination="@id/scanFragment"/>
     </fragment>
     <fragment android:id="@+id/music" android:name="com.example.projectprepare1.ui.music.musicFragment"
               android:label="music_fragment" tools:layout="@layout/music_fragment"/>
+    <fragment android:id="@+id/scanFragment" android:name="com.example.projectprepare1.ui.scan.ScanFragment"
+              android:label="fragment_scan" tools:layout="@layout/fragment_scan"/>
 </navigation>
