@@ -34,16 +34,16 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "song_table")
 data class Song(
     @PrimaryKey val id: String,
-    @ColumnInfo(name = "song") var song: String,
-    @ColumnInfo(name = "singer") var singer: String,
-    @ColumnInfo(name = "duration") var duration: String,
-    @ColumnInfo(name = "path") var path: String,
-    @ColumnInfo(name = "size") var size: String)
+    @ColumnInfo(name = "song") val song: String,
+    @ColumnInfo(name = "singer") val singer: String,
+    @ColumnInfo(name = "duration") val duration: String,
+    @ColumnInfo(name = "path") val path: String,
+    @ColumnInfo(name = "size") val size: String)
 
 //歌单
 @Entity(tableName = "songlist_table")
 data class SongList(
     @PrimaryKey val id: String,
-    @ColumnInfo(name = "name") var name: String,
-    @ColumnInfo(name = "songs") var songs: ArrayList<Song>
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "songs") val songs: ArrayList<Song>
 )

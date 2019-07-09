@@ -1,3 +1,4 @@
+package com.example.android.roomwordssample
 
 /*
  * Copyright (C) 2017 Google Inc.
@@ -55,14 +56,14 @@ abstract class MusicRoomDatabase : RoomDatabase() {
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
                     .fallbackToDestructiveMigration()
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(MusicDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance
                 instance
             }
         }
-        private class WordDatabaseCallback(
+        private class MusicDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
             /**
@@ -85,14 +86,12 @@ abstract class MusicRoomDatabase : RoomDatabase() {
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
-        fun populateDatabase(musicDao: MusicDao) {
+        suspend fun populateDatabase(musicDao: MusicDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
 //            musicDao.deleteAll()
-//            var word = Word("Hello")
-//            wordDao.insert(word)
-//            word = Word("World!")
-//            wordDao.insert(word)
+//            var song = Song("Hello","a","a","1","a","5")
+//            musicDao.insert(song)
         }
     }
 }
