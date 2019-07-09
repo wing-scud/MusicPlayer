@@ -29,7 +29,7 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     val song = Song("","","","","","")
-                    song.id = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST_ID))
+//                    song.id = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST_ID))
                     song.song = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME))
                     song.singer = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
                     song.path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
