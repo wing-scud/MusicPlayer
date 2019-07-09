@@ -34,5 +34,5 @@ interface MusicDao {
     fun getAllSongs(): LiveData<List<Song>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(song: Song)
+    fun insert(song: Song)
 }
