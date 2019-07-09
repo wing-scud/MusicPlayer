@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import com.example.projectprepare1.R
 
 import com.example.projectprepare1.entity.Item
 import kotlinx.android.synthetic.main.item_fragment.*
@@ -58,9 +56,6 @@ class itemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         enterMusic.setOnClickListener{
             Navigation.findNavController(view).navigate(com.example.projectprepare1.R.id.action_item_to_music)
-        }
-        scan.setOnClickListener {
-            findNavController(view).navigate(R.id.action_enterMusic_to_scanFragment)
         }
         viewModel = ViewModelProviders.of(this).get(ItemViewModel::class.java)
         //TODO:调用viewModel的方法进行对应操作

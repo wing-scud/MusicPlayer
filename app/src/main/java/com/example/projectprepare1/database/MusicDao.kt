@@ -16,7 +16,6 @@ package com.example.android.roomwordssample
  * limitations under the License.
  */
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -36,7 +35,4 @@ interface MusicDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(song: Song)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertlist(song: Song)
 }
