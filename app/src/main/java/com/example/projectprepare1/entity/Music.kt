@@ -18,6 +18,7 @@ package com.example.android.roomwordssample
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 /**
@@ -41,9 +42,15 @@ data class Song(
     @ColumnInfo(name = "size") val size: String)
 
 //歌单
-@Entity(tableName = "songlist_table")
+@Entity(foreignKeys = arrayOf(
+    ForeignKey(
+    entity = Song::class,
+    parentColumns = arrayOf("id"),
+    childColumns = arrayOf("song_id")))
+,tableName = "song_list_table")
+
 data class SongList(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "songs") val songs: ArrayList<Song>
+    @ColumnInfo(name = "song_id") val song_id: Int
 )
