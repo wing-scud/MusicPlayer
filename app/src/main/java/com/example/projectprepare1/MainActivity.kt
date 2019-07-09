@@ -11,13 +11,18 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.projectprepare1.ui.music.MusicViewModel
+import com.example.projectprepare1.ui.scan.ScanFragment
+import com.example.projectprepare1.ui.scan.ScanRepository
+import com.example.projectprepare1.ui.scan.ScanViewModel
 
 /**
  * fragment展示的容器
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()
         var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
@@ -61,9 +66,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar itemFragment clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        when(item.itemId){
+            R.id.action_settings ->{
+
+            }
+        }
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
