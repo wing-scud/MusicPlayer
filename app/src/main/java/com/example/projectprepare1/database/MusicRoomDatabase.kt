@@ -23,7 +23,7 @@ import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.android.roomwordssample.MusicDao
 import com.example.android.roomwordssample.Song
-import com.example.android.roomwordssample.SongList
+import com.example.android.roomwordssample.Songlist
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
  * The fact that this has very few comments emphasizes its coolness.
  */
 @Database(
-    entities = [Song::class, SongList::class],
+    entities = [Song::class, Songlist::class, SonglistSongJoin::class],
     version = 1)
 abstract class MusicRoomDatabase : RoomDatabase() {
     abstract fun musicDao(): MusicDao
