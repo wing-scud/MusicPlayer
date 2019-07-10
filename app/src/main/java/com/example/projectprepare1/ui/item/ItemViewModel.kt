@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.android.roomwordssample.MusicRoomDatabase
-import com.example.android.roomwordssample.Song
-import com.example.android.roomwordssample.SongList
 import com.example.projectprepare1.entity.Item
 import com.example.projectprepare1.ui.scan.ScanRepository
 import kotlinx.coroutines.launch
@@ -28,8 +26,5 @@ class ItemViewModel (application: Application) : AndroidViewModel(application) {
     init {
         val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
         repository = ScanRepository(musicDao)
-    }
-    fun insertSongList() = viewModelScope.launch {
-        repository.insertSongList(SongList("1","  "))
     }
 }
