@@ -32,25 +32,33 @@ import androidx.room.PrimaryKey
  * https://developer.android.com/topic/libraries/architecture/room.html
  */
 //歌曲
-@Entity(foreignKeys = arrayOf(
-    ForeignKey(
-        entity = SongList::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("song_list_id")))
-    ,tableName = "song_table")
+@Entity(tableName = "song_table")
 data class Song(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "song") var song: String?,
     @ColumnInfo(name = "singer") var singer: String?,
     @ColumnInfo(name = "duration") var duration: String?,
     @ColumnInfo(name = "path") var path: String?,
-    @ColumnInfo(name = "size") var size: String,
-    @ColumnInfo(name = "song_list_id") var song_list_id: String?)
-
+    @ColumnInfo(name = "size") var size: String
+)
 //歌单
-@Entity(tableName = "song_list_table")
-data class SongList(
+@Entity(tableName = "songlist_table")
+data class Songlist(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "name") var name: String?
-
+)
+//连接
+@Entity(tableName = "songlist_song_join_table",
+    primaryKeys = ["songlistId", "songId"],
+    foreignKeys = [
+        ForeignKey(entity = Songlist::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("songlistId")),
+        ForeignKey(entity = Song::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("songId"))]
+)
+data class SonglistSongJoin(
+    val songlistId: String,
+    val songId: String
 )

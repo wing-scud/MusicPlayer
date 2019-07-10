@@ -35,17 +35,34 @@ interface MusicDao {
     @Query("SELECT * FROM song_table")
     fun getAllSongs(): LiveData<List<Song>>
 
-//    @Query("SELECT * FROM song_list_table WHERE id == :songListId")
-//    fun getSongsInSongList(songListId: String): LiveData<List<Song>>
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertSongList(songList: SongList)
+    fun insertSongList(songList: Songlist)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertSonglistSongJoin(songlistSongJoin: SonglistSongJoin)
 
     @Update
     fun updateSong(song: Song)
+    @Update
+    fun updateSonglist(songlist: Songlist)
 
     @Query("DELETE FROM song_table")
     fun deleteAll()
+
+    @Query("""
+           SELECT * FROM songlist_table
+           INNER JOIN songlist_song_join_table
+           ON songlist_table.id LIKE songlist_song_join_table.songlistId
+           WHERE songlist_song_join_table.songId LIKE :songId
+           """)
+    fun getSonglistsForSong(songId: String): Array<Songlist>
+
+    @Query("""
+           SELECT * FROM song_table
+           INNER JOIN songlist_song_join_table
+           ON song_table.id LIKE songlist_song_join_table.songId
+           WHERE songlist_song_join_table.songlistId LIKE :songlistId
+           """)
+    fun getSongsForSonglist(songlistId: String): Array<Song>
 }
