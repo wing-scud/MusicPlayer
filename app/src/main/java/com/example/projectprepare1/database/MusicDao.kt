@@ -33,7 +33,9 @@ import androidx.room.*
 @Dao
 interface MusicDao {
     @Query("SELECT * FROM song_table")
-    fun getAllSongs(): LiveData<List<Song>>
+    fun getAllSongs(): List<Song>
+    @Query("SELECT * FROM song_table WHERE song_table.id LIKE :songId")
+    fun getSong(songId: String): Song
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)

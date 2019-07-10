@@ -59,7 +59,8 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
         }
     }
     init {
-        val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
+       // val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
+        val musicDao = MusicRoomDatabase.instance.musicDao()
         repository = ScanRepository(musicDao)
     }
      fun insertSong(list: List<Song>) = viewModelScope.launch {

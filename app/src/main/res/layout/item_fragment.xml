@@ -32,6 +32,24 @@
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"/>
+        <Button
+                android:text="playAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/playAll" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/scan" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/item" app:layout_constraintEnd_toStartOf="@+id/playList"
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.412"
+                app:layout_constraintVertical_bias="0.737"/>
+        <Button
+                android:text="playList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/playList" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/enterMusic"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

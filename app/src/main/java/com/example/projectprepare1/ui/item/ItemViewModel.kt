@@ -24,7 +24,8 @@ class ItemViewModel (application: Application) : AndroidViewModel(application) {
         return items
     }
     init {
-        val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
+        //val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
+        val musicDao = MusicRoomDatabase.instance.musicDao()
         repository = ScanRepository(musicDao)
     }
 }

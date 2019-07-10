@@ -1,5 +1,6 @@
 package com.example.projectprepare1.ui.item
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
+import com.example.projectprepare1.PlayerActivity
 import com.example.projectprepare1.R
 
 import com.example.projectprepare1.entity.Item
@@ -69,6 +71,9 @@ class itemFragment : Fragment() {
             override fun onChanged(t: ArrayList<Item>?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
+        }
+        playAll.setOnClickListener {
+            startActivity(Intent(context,PlayerActivity::class.java))
         }
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         itemliveData?.observe(this,itemObserver)
