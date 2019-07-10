@@ -18,6 +18,7 @@ package com.example.android.roomwordssample
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 /**
@@ -32,10 +33,10 @@ import androidx.room.*
 @Dao
 interface MusicDao {
     @Query("SELECT * FROM song_table")
-    fun getAllSongs(): LiveData<List<Song>>
+    fun getAllSongs(): MutableLiveData<List<Song>>
 
     @Query("SELECT * FROM song_list_table WHERE id == :songListId")
-    fun getSongsInSongList(songListId: String): LiveData<List<Song>>
+    fun getSongsInSongList(songListId: String): MutableLiveData<List<Song>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertList(song: Song)
