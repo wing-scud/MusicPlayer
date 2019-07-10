@@ -60,6 +60,7 @@ class itemFragment : Fragment() {
             Navigation.findNavController(view).navigate(com.example.projectprepare1.R.id.action_item_to_music)
         }
         scan.setOnClickListener {
+            viewModel.insertSongList()
             findNavController(view).navigate(R.id.action_enterMusic_to_scanFragment)
         }
         viewModel = ViewModelProviders.of(this).get(ItemViewModel::class.java)
