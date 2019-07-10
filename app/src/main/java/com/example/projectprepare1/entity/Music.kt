@@ -45,7 +45,7 @@ data class Song(
     @ColumnInfo(name = "duration") var duration: String,
     @ColumnInfo(name = "path") var path: String,
     @ColumnInfo(name = "size") var size: String,
-    @ColumnInfo(name = "song_list_id") var song_id: String)
+    @ColumnInfo(name = "song_list_id") var song_list_id: String)
 
 //歌单
 @Entity(tableName = "song_list_table")

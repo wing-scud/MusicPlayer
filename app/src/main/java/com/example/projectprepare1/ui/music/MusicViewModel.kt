@@ -26,7 +26,7 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(song: Song) = viewModelScope.launch {
-        repository.insert(song)
+    fun insertSong(song: Song) = viewModelScope.launch {
+        repository.insertSong(song)
     }
 }

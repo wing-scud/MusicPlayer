@@ -33,17 +33,19 @@ import androidx.room.*
 @Dao
 interface MusicDao {
     @Query("SELECT * FROM song_table")
-    fun getAllSongs(): MutableLiveData<List<Song>>
+    fun getAllSongs(): LiveData<List<Song>>
 
-    @Query("SELECT * FROM song_list_table WHERE id == :songListId")
-    fun getSongsInSongList(songListId: String): MutableLiveData<List<Song>>
+//    @Query("SELECT * FROM song_list_table WHERE id == :songListId")
+//    fun getSongsInSongList(songListId: String): LiveData<List<Song>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertList(song: Song)
+    fun insertSong(song: Song)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertSongList(songList: SongList)
 
     @Update
     fun updateSong(song: Song)
 
     @Query("DELETE FROM song_table")
-    suspend fun deleteAll()
+    fun deleteAll()
 }
