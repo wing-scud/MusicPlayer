@@ -29,7 +29,6 @@ class ScanFragment : Fragment() {
             scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
             Thread(Runnable {
                 context?.let { it1 -> ScanViewModel.MusicUtils.getMusicData(it1) }
-                scanViewModel.insertSongList()
                 scanViewModel.deleteAll()
                 scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
             }).start()
