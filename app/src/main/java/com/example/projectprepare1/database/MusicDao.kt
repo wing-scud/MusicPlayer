@@ -38,7 +38,7 @@ interface MusicDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertSongList(songList: Songlist)
+    fun insertSongList(songlist: Songlist)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSonglistSongJoin(songlistSongJoin: SonglistSongJoin)
 
