@@ -16,6 +16,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.projectprepare1.ui.music.MusicViewModel
 import com.example.projectprepare1.ui.scan.ScanFragment
+import com.example.projectprepare1.ui.scan.ScanPermissionUtils
 import com.example.projectprepare1.ui.scan.ScanRepository
 import com.example.projectprepare1.ui.scan.ScanViewModel
 
@@ -23,6 +24,9 @@ import com.example.projectprepare1.ui.scan.ScanViewModel
  * fragment展示的容器
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    val permissionUtils = ScanPermissionUtils(this)
+    private var mHasPermissionRunnable: Runnable= Runnable {
+    }
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()
         var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        permissionUtils.checkStoragePermission(mHasPermissionRunnable)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
