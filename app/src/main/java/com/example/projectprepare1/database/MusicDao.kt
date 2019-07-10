@@ -34,9 +34,15 @@ interface MusicDao {
     @Query("SELECT * FROM song_table")
     fun getAllSongs(): LiveData<List<Song>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(song: Song)
+    @Query("SELECT * FROM song_list_table WHERE id == :songListId")
+    fun getSongsInSongList(songListId: String): LiveData<List<Song>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertlist(song: Song)
+    fun insertList(song: Song)
+
+    @Update
+    fun updateSong(song: Song)
+
+    @Query("DELETE FROM song_table")
+    suspend fun deleteAll()
 }

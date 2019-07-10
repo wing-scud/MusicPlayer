@@ -32,25 +32,25 @@ import androidx.room.PrimaryKey
  * https://developer.android.com/topic/libraries/architecture/room.html
  */
 //歌曲
-@Entity(tableName = "song_table")
+@Entity(foreignKeys = arrayOf(
+    ForeignKey(
+        entity = SongList::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("song_list_id")))
+    ,tableName = "song_table")
 data class Song(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "song") var song: String,
     @ColumnInfo(name = "singer") var singer: String,
     @ColumnInfo(name = "duration") var duration: String,
     @ColumnInfo(name = "path") var path: String,
-    @ColumnInfo(name = "size") var size: String)
+    @ColumnInfo(name = "size") var size: String,
+    @ColumnInfo(name = "song_list_id") var song_id: String)
 
 //歌单
-@Entity(foreignKeys = arrayOf(
-    ForeignKey(
-    entity = Song::class,
-    parentColumns = arrayOf("id"),
-    childColumns = arrayOf("song_id")))
-,tableName = "song_list_table")
-
+@Entity(tableName = "song_list_table")
 data class SongList(
     @PrimaryKey var id: String,
-    @ColumnInfo(name = "name") var name: String,
-    @ColumnInfo(name = "song_id") var song_id: Int
+    @ColumnInfo(name = "name") var name: String
+
 )
