@@ -1,8 +1,6 @@
 package com.example.android.roomwordssample
 
 import androidx.lifecycle.LiveData
-import com.example.android.roomwordssample.MusicDao
-import com.example.android.roomwordssample.Song
 
 /*
  * Copyright (C) 2017 Google Inc.
@@ -27,8 +25,8 @@ import com.example.android.roomwordssample.Song
 class MusicRepository(private val musicDao: MusicDao) {
     val allSongs: LiveData<List<Song>> = musicDao.getAllSongs()
 
-    suspend fun insert(song: Song) {
-        musicDao.insert(song)
+    suspend fun insertSong(song: Song) {
+        musicDao.insertSong(song)
     }
 
 }
