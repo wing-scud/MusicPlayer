@@ -24,6 +24,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.android.roomwordssample.MusicDao
 import com.example.android.roomwordssample.Song
 import com.example.android.roomwordssample.Songlist
+import com.example.projectprepare1.ItemApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -31,67 +32,25 @@ import kotlinx.coroutines.launch
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
+
 @Database(
     entities = [Song::class, Songlist::class, SonglistSongJoin::class],
     version = 1)
 abstract class MusicRoomDatabase : RoomDatabase() {
     abstract fun musicDao(): MusicDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: MusicRoomDatabase? = null
-
-        fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
-        ): MusicRoomDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    MusicRoomDatabase::class.java,
-                    "music_database"
-                )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
-                    .fallbackToDestructiveMigration()
-                    .addCallback(MusicDatabaseCallback(scope))
-                    .build()
-                INSTANCE = instance
-                // return instance
-                instance
-            }
-        }
-        private class MusicDatabaseCallback(
-            private val scope: CoroutineScope
-        ) : RoomDatabase.Callback() {
-            /**
-             * Override the onOpen method to populate the database.
-             * For this sample, we clear the database every time it is created or opened.
-             */
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch {
-                        populateDatabase(database.musicDao())
-                    }
-                }
-            }
+        //以单例模式创建数据库
+        companion object{
+            val instance = Singleton.single
         }
 
-        /**
-         * Populate the database in a new coroutine.
-         * If you want to start with more words, just add them.
-         */
-        suspend fun populateDatabase(musicDao: MusicDao) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-//            musicDao.deleteAll()
-//            var song = Song("Hello","a","a","1","a","5")
-//            musicDao.insert(song)
+        private object Singleton{
+            val single:MusicRoomDatabase = Room.databaseBuilder(
+                ItemApplication.instance,
+                MusicRoomDatabase::class.java,
+                "PlanA.db"
+            )
+                .allowMainThreadQueries()
+                .build()
+
         }
     }
-}

@@ -1,6 +1,7 @@
 package com.example.projectprepare1
 
 import android.app.Application
+import kotlin.properties.Delegates
 
 /**
 2 * Copyright (C), 2015-2019, XXX有限公司
@@ -13,8 +14,14 @@ import android.app.Application
 9 * 作者姓名 修改时间 版本号 描述
 10 */
 class ItemApplication:Application() {
-    override fun onCreate() {
+    companion object {
+        var instance: ItemApplication by Delegates.notNull()
+        fun instance() = instance
+    }
+
+    override fun onCreate(){
         super.onCreate()
-        //全局初始化，如扫描本地.mp3文件
+
+        instance = this
     }
 }
