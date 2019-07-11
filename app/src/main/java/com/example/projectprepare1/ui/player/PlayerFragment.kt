@@ -68,6 +68,7 @@ class PlayerFragment : Fragment() {
         addSongList.setOnClickListener {
             var dialog = android.app.AlertDialog.Builder(this.context)
             dialog.setTitle("收藏到的歌单")
+            //TODO:引用歌单
             var items:Array<String> = arrayOf("How", "Are", "You")
             var itemState:BooleanArray= booleanArrayOf(false,false,false)
             dialog.setMultiChoiceItems(items,itemState,DialogInterface.OnMultiChoiceClickListener(){ dialogInterface: DialogInterface, i: Int, b: Boolean ->
@@ -77,14 +78,13 @@ class PlayerFragment : Fragment() {
             dialog.setPositiveButton("确定",DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
                 for(i in 0 until items.size){
                     if(itemState[i]==true){
-                        //添加到歌单中
+                        //TODO:添加到歌单中
                     }
                 }
             })
             dialog.setNegativeButton("取消") { dialog, which -> }
             dialog.show()
         }
-
 
         playSong.setOnClickListener{
             viewModel.setPause(!pause.value!!)
@@ -107,9 +107,9 @@ class PlayerFragment : Fragment() {
         front.setOnClickListener {
             if (mediaPlayer?.isPlaying!!)
                 mediaPlayer?.stop()
-            viewModel.setPause(true)
-            viewModel.setCurrentMusic(1)
-            initMusic()
+              viewModel.setPause(true)
+              viewModel.setCurrentMusic(1)
+              initMusic()
         }
         next.setOnClickListener {
             if (mediaPlayer?.isPlaying!!)

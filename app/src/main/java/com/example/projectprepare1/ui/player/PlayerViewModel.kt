@@ -41,7 +41,15 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
         return volume
     }
     fun setCurrentMusic(currentMusicT:Int){
-        currentMusic.postValue(currentMusic.value!!-currentMusicT)
+        if(currentMusic.value!!-currentMusicT>musicList?.value!!.size){
+            currentMusic.value=0
+        }
+        if(currentMusic.value!!-currentMusicT<0){
+            currentMusic.value=musicList?.value!!.size
+        }
+        else{
+            currentMusic.value=currentMusic.value!!-currentMusicT
+        }
     }
     fun setPlayWay(playWayT:Int){
         playWay.value=playWayT

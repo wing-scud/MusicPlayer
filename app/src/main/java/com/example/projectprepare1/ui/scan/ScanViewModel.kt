@@ -47,7 +47,11 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
                             song.singer = str[0]
                             song.song = str[1]
                         }
-                        list.add(song)
+                        var str=song.song!!.split(".")
+                        Log.d("music",song.song!!+"str ")
+                        if(str.size>1&&str[1].equals("mp3")){
+                            list.add(song)
+                        }
                     }
                 }
                 // 释放资源

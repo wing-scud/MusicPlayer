@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.player.PlayerFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content" android:id="@+id/guideline"
+                                                    android:orientation="horizontal"
+                                                    app:layout_constraintGuide_percent="0.07"/>
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guideline2"
+                                                    android:orientation="horizontal"
+                                                    app:layout_constraintGuide_percent="0.84"/>
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guideline3"
+                                                    android:orientation="horizontal"
+                                                    app:layout_constraintGuide_percent="0.91"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" android:id="@+id/linearLayout">
+            <TextView
+                    android:text="播放时间"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/timePlay" android:layout_weight="1"
+                    android:layout_gravity="center"/>
+            <SeekBar
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/seekBar" android:layout_weight="6"
+                    android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:id="@+id/linearLayout2">
+            android:layout_gravity="left|center"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:layout_weight="1">
+                <TextView
+                        android:text="歌名"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="match_parent" android:id="@+id/musicName"
+                        android:layout_gravity="left|center"/>
+                <TextView
+                        android:text="歌手"
+                        android:layout_width="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="bottom"
+                        android:layout_height="match_parent" android:id="@+id/musicSonger"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:layout_weight="1">
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/addSongList"
+                        android:layout_gravity="center" android:text="收藏"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent">
+            <Button
+                    android:text="Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/播放方式" android:layout_weight="1"/>
+            <Button
+                    android:text="上一首"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content" android:id="@+id/front"
+                    android:layout_weight="1"/>
+            <Button
+                    android:text="播放"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/playSong"/>
+            <Button
+                    android:text="下一首"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_height="wrap_content" android:id="@+id/next"
+                    android:textAlignment="center" android:gravity="center"/>
+        </LinearLayout>
+        <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent">
+            <com.hw.lrcviewlib.LrcView
+                    android:id="@+id/au_lrcView"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            <com.example.projectprepare1.view.GramophoneView
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent" android:id="@+id/gramophoneView"/>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+
+
