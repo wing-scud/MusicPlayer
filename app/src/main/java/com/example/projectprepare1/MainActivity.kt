@@ -86,19 +86,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-//下面函数没反应？？？
+    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
+    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
+    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
+    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
+    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
             R.id.nav_about-> {
-                Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
-                System.exit(0)
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent);
             }
             R.id.nav_out-> {
-//                onOptionsItemSelected(R.id.nav_out) {
-//                    System.exit(0)
-//                }
+                System.exit(0)
+
             }
         }
         Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
