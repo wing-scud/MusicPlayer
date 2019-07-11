@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_out-> {
                 System.exit(0)
-
             }
         }
         Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
