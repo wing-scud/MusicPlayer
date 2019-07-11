@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.android.roomwordssample.Song
 
 import com.example.projectprepare1.R
@@ -32,6 +33,7 @@ class ScanFragment : Fragment() {
                 scanViewModel.deleteAll()
                 scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
             }).start()
+            findNavController().navigate(R.id.action_scanFragment_to_homeFragment)
         }
     }
 }

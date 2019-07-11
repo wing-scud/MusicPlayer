@@ -15,7 +15,7 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allSongs: LiveData<List<Song>>?=null
+//    val allSongs: LiveData<List<Song>>?=null
 
     init {
        // val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
@@ -29,5 +29,8 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun insertSong(song: Song) = viewModelScope.launch {
         repository.insertSong(song)
+    }
+    fun getSongs():List<Song>{
+        return repository.allSongs
     }
 }
