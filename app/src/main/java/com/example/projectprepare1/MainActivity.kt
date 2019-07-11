@@ -91,10 +91,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
-                // Handle the camera action
-            }
             R.id.nav_about-> {
                 Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
                 System.exit(0)
