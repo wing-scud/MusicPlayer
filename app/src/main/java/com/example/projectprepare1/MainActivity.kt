@@ -30,11 +30,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val permissionUtils = ScanPermissionUtils(this)
     private var mHasPermissionRunnable: Runnable= Runnable {
     }
-//    override fun onSupportNavigateUp(): Boolean {
-//        return super.onSupportNavigateUp()
-//        var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
-//        return NavHostFragment.findNavController(fragment).navigateUp();
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+        var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
+        return NavHostFragment.findNavController(fragment).navigateUp();
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_home -> {
                 Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
-
                 // Handle the camera action
             }
             R.id.nav_about-> {
@@ -106,7 +105,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                }
             }
         }
-
         Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
