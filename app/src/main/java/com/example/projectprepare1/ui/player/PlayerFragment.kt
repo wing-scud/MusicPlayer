@@ -2,6 +2,7 @@ package com.example.projectprepare1.ui.player
 
 import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.Typeface
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -18,13 +19,19 @@ import androidx.lifecycle.Observer
 import com.example.android.roomwordssample.Song
 import com.example.projectprepare1.R
 import com.example.projectprepare1.util.DisPlayUtil
+import com.example.projectprepare1.util.PlayerUtil.Companion.setAudioNext
+import com.example.projectprepare1.util.PlayerUtil.Companion.setNexFromPlayWay
+import com.example.projectprepare1.util.PlayerUtil.Companion.timeParse
 import com.hw.lrcviewlib.ILrcViewSeekListener
 import com.hw.lrcviewlib.LrcDataBuilder
+import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.player_fragment.*
 
 
+
+
 class PlayerFragment : Fragment() {
-    private var mediaPlayer: MediaPlayer?=null
+     var mediaPlayer: MediaPlayer?=null
     var musicListFra:List<Song>?=null
     var currentMusic:Int=0
     companion object {
@@ -39,6 +46,15 @@ class PlayerFragment : Fragment() {
                 1->{
                     timePlay.text=msg.data.getString("timePlay")
                 }
+                2->
+                {
+                    //自动切歌，当一首歌播放结束后
+                    viewModel.setPause(true)
+                    mediaPlayer?.reset()
+                    viewModel.setCurrentMusic(setNexFromPlayWay(viewModel.getPlayWay().value!!,currentMusic,musicListFra!!))
+                    initMusic()
+                    viewModel.setPause(false)
+                }
             }
         }
     }
@@ -52,12 +68,20 @@ class PlayerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
         initMusic()
+        val assets =context!!.assets
+        var fromAsset = Typeface.createFromAsset(assets, "fonts/tff1.ttf");
+        musicName.typeface = fromAsset
+        musicSonger.typeface = fromAsset
+        timePlay.typeface=fromAsset
         val pause = viewModel.getPause()
         pause.observe(this,Observer<Boolean>{
             //播放歌曲  ，操作pause
-            if(pause?.value==true){
+            gramophoneView.playing=!pause.value!!
+            if(pause.value!!){
                 if(mediaPlayer?.isPlaying!!)
+                {
                     mediaPlayer?.pause()
+                }
             }
             else{
                 mediaPlayer?.start()
@@ -85,17 +109,25 @@ class PlayerFragment : Fragment() {
             dialog.setNegativeButton("取消") { dialog, which -> }
             dialog.show()
         }
-
+        //播放按钮点击事件
         playSong.setOnClickListener{
             viewModel.setPause(!pause.value!!)
-            //更新pause,取反
+            if(pause.value!!){
+                playSong.setImageResource(R.drawable.play)
+            }
+            else{
+                playSong.setImageResource(R.drawable.stop)
+            }
         }
+        //进度条拖动
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    mediaPlayer?.seekTo(seekBar.progress)
-                    timePlay.text=timeParse((mediaPlayer!!.duration
-                            - mediaPlayer?.currentPosition!!).toLong())
+                    mediaPlayer?.seekTo(progress)
+                 //   Log.d("music", mediaPlayer?.currentPosition!!.toString()+"  currentPosition")
+                    timePlay.text=timeParse((mediaPlayer!!.duration - mediaPlayer?.currentPosition!!).toLong())
+//                    Log.d("music",seekBar.progress.toString()+"  seekBar.progress ")
+//                    Log.d("music",progress.toString()+"  .progress ")
                 }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -105,19 +137,23 @@ class PlayerFragment : Fragment() {
         })
         //切歌
         front.setOnClickListener {
-            if (mediaPlayer?.isPlaying!!)
-                mediaPlayer?.stop()
+              mediaPlayer?.reset()
               viewModel.setPause(true)
-              viewModel.setCurrentMusic(1)
+              viewModel.setCurrentMusic(setAudioNext(1,currentMusic,musicListFra!!))
               initMusic()
         }
         next.setOnClickListener {
-            if (mediaPlayer?.isPlaying!!)
-                mediaPlayer?.stop()
+            mediaPlayer?.reset()
             viewModel.setPause(true)
-            viewModel.setCurrentMusic(-1)
+            viewModel.setCurrentMusic(setAudioNext(-1,currentMusic,musicListFra!!))
             initMusic()
         }
+        val current=viewModel.getCurrentMusic()
+        current.observe(this,Observer<Int>{
+            //监听，重新缓冲歌
+            Log.d("music","current  observe")
+              //  initMusic()
+        })
         gramophoneView.setOnClickListener {
             gramophoneView.visibility = View.GONE
             au_lrcView.visibility = View.VISIBLE
@@ -128,9 +164,72 @@ class PlayerFragment : Fragment() {
             au_lrcView.visibility = View.GONE
             Toast.makeText(this.context, "点击歌词，显示专辑封面", Toast.LENGTH_SHORT).show()
         }
+        playWayView.setOnClickListener {
+            var playWay=viewModel.getPlayWay()
+            viewModel.setPlayWay(1)
+            var str=""
+            when(playWay.value){
+                1->{
+                    str="单曲循环"
+                    playWayView.setImageResource(R.drawable.turn1)
+                }
+                2->{
+                    str="顺序播放"
+                    playWayView.setImageResource(R.drawable.turn2)
+                }
+                3->{
+                    str="随机播放"
+                    playWayView.setImageResource(R.drawable.turn3)
+                }
+            }
+            Toast.makeText(context,str,Toast.LENGTH_SHORT).show()
 
-        var lrcRows =  LrcDataBuilder().BuiltFromAssets(this.context, "yang1.lrc");
-        //ro  List<LrcRow> lrcRows = new LrcDataBuilder().Build(file);
+        }
+        initLrc()
+    }
+    private fun initMusic() {
+        if(mediaPlayer==null)
+            mediaPlayer= MediaPlayer()
+        if(musicListFra==null)
+            musicListFra=viewModel.getMusicList()?.value
+        currentMusic=viewModel.getCurrentMusic().value!!
+        var path=musicListFra?.get(currentMusic)!!.path
+        mediaPlayer?.setDataSource(path) //设置 播放路径
+        mediaPlayer?.prepare()
+        timePlay.text=timeParse(mediaPlayer?.duration!!.toLong())
+        seekBar.max= mediaPlayer?.duration!!
+        seekBar.progress=0
+       // Log.d("music", mediaPlayer?.duration.toString()+" duration1 ")
+        musicName.text= musicListFra!![currentMusic].song
+        musicSonger.text=musicListFra!![currentMusic].singer
+        //gramophoneView.setPictureRes(getResourceMusicImage(music.image))
+    }
+    private fun seekBarListen() {
+        val thread = object : Thread() {
+            override fun run() {
+                val pause = viewModel.getPause()
+                while (!pause.value!!) {
+                    var current = mediaPlayer?.currentPosition!!
+                    var timeSymbol = timeParse((mediaPlayer!!.duration - current).toLong())
+                    var message = Message()
+                    message.what = 1
+                    seekBar.progress=current
+                    message.data.putString("timePlay", timeSymbol)
+                    handler.sendMessage(message)
+                    if(!mediaPlayer?.isPlaying!!){
+                        var message2 = Message()
+                        message2.what = 2
+                        handler.sendMessage(message2)
+                        Log.d("music","new music ")
+                    }
+                    Thread.sleep(500)
+                }
+            }
+        }.start()
+    }
+    private fun initLrc(){
+
+       var lrcRows =  LrcDataBuilder().BuiltFromAssets(this.context, "yang1.lrc");
         au_lrcView.setTextSizeAutomaticMode(true);//是否自动适配文字大小
 
         au_lrcView.setLrcViewSeekListener(ILrcViewSeekListener { currentLrcRow, CurrentSelectedRowTime ->
@@ -152,63 +251,5 @@ class PlayerFragment : Fragment() {
 
         au_lrcView.commitLrcSettings()
         au_lrcView.setLrcData(lrcRows)
-
-
-
-    }
-    private fun initMusic() {
-        if(mediaPlayer==null)
-            mediaPlayer= MediaPlayer()
-        if(musicListFra==null)
-            musicListFra=viewModel.getMusicList()?.value
-        currentMusic=viewModel.getCurrentMusic().value!!
-        seekBar.progress=0
-        var path=viewModel.getMusicList()?.value!!.get(viewModel.getCurrentMusic().value!!).path
-        Log.d("music",path+"  path ")
-        mediaPlayer!!.setDataSource(path)   //设置 播放路径
-      //  mediaPlayer = MediaPlayer.create(this.context,R.raw.yang)
-        mediaPlayer!!.prepareAsync()
-        Log.d("music",mediaPlayer?.duration.toString()+"duration")
-        seekBar.max= mediaPlayer?.duration!!
-        timePlay.text=timeParse(mediaPlayer?.duration!!.toLong())
-        musicName.text= musicListFra!![currentMusic].song
-        musicSonger.text=musicListFra!![currentMusic].singer
-        //gramophoneView.setPictureRes(getResourceMusicImage(music.image))
-    }
-    private fun seekBarListen() {
-        var thread = object : Thread() {
-            override fun run() {
-                val pause = viewModel.getPause()
-                while (!pause.value!!) {
-                    var current = mediaPlayer?.currentPosition!!
-                    var timeSymbol = timeParse((mediaPlayer!!.duration - current).toLong())
-                    var message = Message()
-                    message.what = 1
-                    message.data.putString("timePlay", timeSymbol)
-                    handler.sendMessage(message)
-                    gramophoneView.playing=!pause.value!!
-                }
-            }
-        }.start()
-    }
-    private fun timeParse(duration: Long): String {
-        var time = ""
-        var minute = duration / 60000
-        var seconds = duration % 60000
-        var second = Math.round(seconds.toDouble() / 1000)
-        if (minute < 10) {
-            time += "0"
-        }
-        time += minute.toString() + ":"
-        if (second < 10) {
-            time += "0"
-        }
-        time += second
-        return time
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //mediaPlayer?.stop()
     }
 }

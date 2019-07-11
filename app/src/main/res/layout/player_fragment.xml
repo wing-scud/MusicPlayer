@@ -7,10 +7,19 @@
         tools:context=".ui.player.PlayerFragment">
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                        android:layout_height="match_parent">
+        <ImageView
+                android:src="@drawable/bg"
+                android:layout_width="0dp"
+                android:scaleType="centerCrop"
+                android:layout_height="0dp" android:id="@+id/bg"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintDimensionRatio="h,"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"/>
         <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content" android:id="@+id/guideline"
                                                     android:orientation="horizontal"
-                                                    app:layout_constraintGuide_percent="0.07"/>
+                                                    app:layout_constraintGuide_percent="0.09"/>
         <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
                                                     android:id="@+id/guideline2"
@@ -32,6 +41,7 @@
             <TextView
                     android:text="播放时间"
                     android:layout_width="0dp"
+                    android:textColor="#D6D2C3"
                     android:layout_height="wrap_content" android:id="@+id/timePlay" android:layout_weight="1"
                     android:layout_gravity="center"/>
             <SeekBar
@@ -56,11 +66,11 @@
                 <TextView
                         android:text="歌名"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_weight="3"
                         android:gravity="bottom"
                         android:layout_marginBottom="8dp"
                         android:layout_height="match_parent" android:id="@+id/musicName"
-                        android:layout_gravity="left|center"/>
+                        android:layout_gravity="left|center" android:textSize="18sp"/>
                 <TextView
                         android:text="歌手"
                         android:layout_width="0dp"
@@ -74,12 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="right"
-                    android:layout_weight="1">
-                <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" android:id="@+id/addSongList"
-                        android:layout_gravity="center" android:text="收藏"/>
-            </LinearLayout>
+                    android:layout_weight="0.4"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -87,30 +92,33 @@
                 android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent">
-            <Button
-                    android:text="Button"
+                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/linearLayout3">
+            <ImageView
+                    android:src="@drawable/turn1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:id="@+id/播放方式" android:layout_weight="1"/>
-            <Button
-                    android:text="上一首"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content" android:id="@+id/playWayView" android:layout_weight="1"/>
+            <ImageView
+                    android:src="@drawable/next"
                     android:layout_width="0dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_height="wrap_content" android:id="@+id/front"
-                    android:layout_weight="1"/>
-            <Button
-                    android:text="播放"
-                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content" android:id="@+id/front" android:layout_weight="1"/>
+            <ImageView
+                    android:src="@drawable/play"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:id="@+id/playSong"/>
-            <Button
-                    android:text="下一首"
-                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/playSong"/>
+            <ImageView
+                    android:src="@drawable/front"
                     android:layout_width="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_height="wrap_content" android:id="@+id/next"
-                    android:textAlignment="center" android:gravity="center"/>
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content" android:id="@+id/next" android:layout_weight="1"/>
+            <ImageView
+                    android:src="@drawable/star"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/addSongList" android:layout_weight="1"/>
         </LinearLayout>
         <FrameLayout
                 android:layout_width="0dp"
@@ -118,11 +126,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/frameLayout" android:layout_marginTop="16dp">
             <com.hw.lrcviewlib.LrcView
                     android:id="@+id/au_lrcView"
                     android:visibility="gone"
                     android:layout_width="match_parent"
+                    android:layout_gravity="center"
                     android:layout_height="match_parent"/>
             <com.example.projectprepare1.view.GramophoneView
                     android:layout_width="match_parent"

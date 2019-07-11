@@ -31,7 +31,7 @@ public class GramophoneView extends View {
     private int halfMeasureWidth;
     // 绘制唱片相关变量
     // 中间图片默认半径
-    private static final int DEFAULT_PICTURE_RADIUS = 400;
+    private static final int DEFAULT_PICTURE_RADIUS = 300;
     // 唱片旋转默认速度，其实是通过每次旋转叠加的角度来控制速度
     private static final float DEFAULT_DISK_ROTATE_SPEED = 0.3f;
     private int pictureRadius;    // 中间图片的半径

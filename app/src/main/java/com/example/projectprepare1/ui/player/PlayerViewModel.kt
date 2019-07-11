@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.example.android.roomwordssample.MusicRepository
 import com.example.android.roomwordssample.MusicRoomDatabase
 import com.example.android.roomwordssample.Song
+import kotlin.random.Random
 
 class PlayerViewModel(application: Application) : AndroidViewModel(application){
     private var repo :PlayerRepository
@@ -41,18 +42,17 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
         return volume
     }
     fun setCurrentMusic(currentMusicT:Int){
-        if(currentMusic.value!!-currentMusicT>musicList?.value!!.size){
-            currentMusic.value=0
-        }
-        if(currentMusic.value!!-currentMusicT<0){
-            currentMusic.value=musicList?.value!!.size
-        }
-        else{
-            currentMusic.value=currentMusic.value!!-currentMusicT
-        }
+        currentMusic.value=currentMusicT
     }
     fun setPlayWay(playWayT:Int){
-        playWay.value=playWayT
+        when(playWay.value){
+            1->
+                playWay.value=2
+            2->
+                playWay.value=3
+            3->
+                playWay.value=1
+        }
     }
     fun setPause(pauseT:Boolean){
         pause.value=pauseT
