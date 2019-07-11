@@ -36,6 +36,12 @@ interface MusicDao {
     fun getAllSongs(): List<Song>
     @Query("SELECT * FROM song_table WHERE song_table.id LIKE :songId")
     fun getSong(songId: String): Song
+    @Query("SELECT DISTINCT singer FROM song_table")
+    fun getSingers(): Array<String>
+    @Query("SELECT * FROM song_table WHERE singer = :singerName")
+    fun getSingerSongs(singerName: String): List<Song>
+    @Query("SELECT * FROM songlist_table")
+    fun getSongList(): List<Songlist>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
@@ -51,6 +57,9 @@ interface MusicDao {
 
     @Query("DELETE FROM song_table")
     fun deleteAll()
+    @Query("DELETE FROM songlist_table WHERE id = :id")
+    fun deleteSongList(id: String)
+
 
     @Query("""
            SELECT * FROM songlist_table
@@ -66,5 +75,5 @@ interface MusicDao {
            ON song_table.id LIKE songlist_song_join_table.songId
            WHERE songlist_song_join_table.songlistId LIKE :songlistId
            """)
-    fun getSongsForSonglist(songlistId: String): Array<Song>
+    fun getSongsForSonglist(songlistId: String): List<Song>
 }
