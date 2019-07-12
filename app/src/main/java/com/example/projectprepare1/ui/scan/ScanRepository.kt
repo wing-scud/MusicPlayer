@@ -29,7 +29,7 @@ class ScanRepository (private val musicDao: MusicDao){
         data.addAll(musicDao.getAllSongs())
     }
     fun insertSongList(){
-        musicDao.insertSongList(Songlist("1",("我的喜爱")))
+        musicDao.insertSongList(Songlist("1","我的喜爱"))
     }
 
 }
