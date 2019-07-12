@@ -12,12 +12,10 @@ class ScanRepository (private val musicDao: MusicDao){
     var songs: MutableLiveData<List<Song>>? = null
     val data = mutableListOf<Song>()
      fun insertSong(list: List<Song>) {
-         Log.e("1111","-------"+list.size+"---------")
          Thread(Runnable {
          for(index in 0..list.size-1){
             list[index].id=(index+1).toString()
              musicDao.insertSong(list[index])
-             Log.e("1111","-------"+list[index]+"---------")
          }
             }).start()
     }fun getAllSongs():List<Song>{
