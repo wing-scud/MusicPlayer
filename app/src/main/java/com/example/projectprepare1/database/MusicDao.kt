@@ -42,6 +42,8 @@ interface MusicDao {
     fun getSingerSongs(singerName: String): List<Song>
     @Query("SELECT * FROM songlist_table")
     fun getSongList(): List<Songlist>
+    @Query("SELECT * FROM songlist_table WHERE name = :songlistName")
+    fun getSongListId(songlistName: String): Songlist
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
