@@ -57,8 +57,10 @@ class HomeFragment : Fragment() {
         val myAdapter = MyAdapter(data,
             MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
                 val songListId = data[position].id
+                val songListName = data[position].name
                 val bundle = Bundle()
                 bundle.putString("listId", songListId)
+                bundle.putString("songList",songListName)
                 findNavController().navigate(R.id.action_homeFragment_to_songInListFragment,bundle)
             },
             MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
@@ -104,8 +106,6 @@ class HomeFragment : Fragment() {
             recyclerView.adapter = myAdapter
 
         })
-
-
     }
 
 

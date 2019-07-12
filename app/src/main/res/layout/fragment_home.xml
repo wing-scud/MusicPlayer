@@ -131,14 +131,17 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/newList"
+            android:text="新建歌单"
+            android:textSize="24sp"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/newList"/>
+
 
 </LinearLayout>
