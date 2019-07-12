@@ -1,33 +1,71 @@
 package com.example.projectprepare1.ui.music
 
-import androidx.lifecycle.ViewModelProviders
+
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.android.roomwordssample.MusicRepository
+import com.example.android.roomwordssample.MusicRoomDatabase
+import com.example.projectprepare1.PlayerActivity
+import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
+import com.hfut.music.MusicAdapter
+import kotlinx.android.synthetic.main.fragment_music.*
 
-class musicFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = musicFragment()
-    }
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
-    private lateinit var viewModel: MusicViewModel
-
+/**
+ * A simple [Fragment] subclass.
+ *
+ */
+class MusicFragment : Fragment() {
+    private lateinit var musicViewModel: MusicViewModel
+    val musicDao = MusicRoomDatabase.instance.musicDao()
+    val musicReponsitory = MusicRepository(musicDao)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.music_fragment, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_music, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MusicViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        musicViewModel = ViewModelProviders.of(this).get(MusicViewModel::class.java)
+        val data = musicViewModel.getSongs()
+        Log.d("temp","++++++++111")
+        val adapter = MusicAdapter(this.context!!, R.layout.music_item,data,
+            object : MyClickListener {
+                override fun onClick(position: Int) {
+                    Log.d("temp","++++++++22")
+                    val intent = Intent(context, PlayerActivity::class.java)
+                    intent.putExtra("local", "本地音乐")
+                    intent.putExtra("songList","0")
+                    intent.putExtra("singer","0")
+                    intent.putExtra("song", data[position].song)
+                    Log.d("temp","++++++++333")
+                    startActivity(intent)
+                }
+            })
+        music_lv.adapter = adapter
+        music_lv.layoutManager = LinearLayoutManager(context)
+        music_lv.layoutManager = GridLayoutManager(context, 1)!!
+        scan.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_localMusicFragment_to_scanFragment)
+        }
     }
 
 }

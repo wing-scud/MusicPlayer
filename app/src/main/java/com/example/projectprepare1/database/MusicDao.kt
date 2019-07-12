@@ -36,7 +36,15 @@ interface MusicDao {
     fun getAllSongs(): List<Song>
     @Query("SELECT * FROM song_table WHERE song_table.id LIKE :songId")
     fun getSong(songId: String): Song
+    @Query("SELECT DISTINCT singer FROM song_table")
+    fun getSingers(): Array<String>
+    @Query("SELECT * FROM song_table WHERE singer = :singerName")
+    fun getSingerSongs(singerName: String): List<Song>
+    @Query("SELECT * FROM songlist_table")
+    fun getSongList(): List<Songlist>
 
+    @Query("SELECT  id FROM songlist_table WHERE name = :listName")
+    fun getListId(listName: String):String
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -51,20 +59,22 @@ interface MusicDao {
 
     @Query("DELETE FROM song_table")
     fun deleteAll()
+    @Query("DELETE FROM songlist_table WHERE id = :id")
+    fun deleteSongList(id: String)
+
 
     @Query("""
            SELECT * FROM songlist_table
            INNER JOIN songlist_song_join_table
-           ON songlist_table.id LIKE songlist_song_join_table.songlistId
-           WHERE songlist_song_join_table.songId LIKE :songId
+           ON songlist_table.id = songlist_song_join_table.songlistId
+           WHERE songlist_song_join_table.songId = :songId
            """)
     fun getSonglistsForSong(songId: String): Array<Songlist>
-
     @Query("""
            SELECT * FROM song_table
            INNER JOIN songlist_song_join_table
-           ON song_table.id LIKE songlist_song_join_table.songId
-           WHERE songlist_song_join_table.songlistId LIKE :songlistId
+           ON song_table.id = songlist_song_join_table.songId
+           WHERE songlist_song_join_table.songlistId = :songlistId
            """)
-    fun getSongsForSonglist(songlistId: String): Array<Song>
+    fun getSongsForSonglist(songlistId: String): List<Song>
 }
