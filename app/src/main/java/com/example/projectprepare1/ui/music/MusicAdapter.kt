@@ -34,7 +34,7 @@ class MusicAdapter (
         return data.size
     }
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        var musicName: TextView = itemView.local_music_name
-        var singerName: TextView = itemView.local_music_singer
+        var musicName: TextView = itemView.local_music_name!!
+        var singerName: TextView = itemView.local_music_singer!!
     }
 }

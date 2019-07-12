@@ -66,15 +66,15 @@ interface MusicDao {
     @Query("""
            SELECT * FROM songlist_table
            INNER JOIN songlist_song_join_table
-           ON songlist_table.id LIKE songlist_song_join_table.songlistId
-           WHERE songlist_song_join_table.songId LIKE :songId
+           ON songlist_table.id = songlist_song_join_table.songlistId
+           WHERE songlist_song_join_table.songId = :songId
            """)
     fun getSonglistsForSong(songId: String): Array<Songlist>
     @Query("""
            SELECT * FROM song_table
            INNER JOIN songlist_song_join_table
-           ON song_table.id LIKE songlist_song_join_table.songId
-           WHERE songlist_song_join_table.songlistId LIKE :songlistId
+           ON song_table.id = songlist_song_join_table.songId
+           WHERE songlist_song_join_table.songlistId = :songlistId
            """)
     fun getSongsForSonglist(songlistId: String): List<Song>
 }

@@ -49,6 +49,9 @@ class HomeFragment : Fragment() {
         home_local_music_ll.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_localMusicFragment)
         }
+        home_local_music_love_ll.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_fondListFragment)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL,false)
 

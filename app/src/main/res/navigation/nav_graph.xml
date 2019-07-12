@@ -11,6 +11,7 @@
               android:label="fragment_home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_homeFragment_to_localMusicFragment" app:destination="@id/localMusicFragment"/>
         <action android:id="@+id/action_homeFragment_to_songInListFragment" app:destination="@id/songInListFragment"/>
+        <action android:id="@+id/action_homeFragment_to_fondListFragment" app:destination="@id/fondListFragment"/>
     </fragment>
     <fragment android:id="@+id/localMusicFragment" android:name="com.example.projectprepare1.ui.localmusic.LocalMusicFragment"
               android:label="fragment_local_music" tools:layout="@layout/fragment_local_music">
@@ -24,4 +25,6 @@
     <fragment android:id="@+id/songInListFragment"
               android:name="com.example.projectprepare1.ui.songinlist.SongInListFragment"
               android:label="fragment_song_in_list" tools:layout="@layout/fragment_song_in_list"/>
+    <fragment android:id="@+id/fondListFragment" android:name="com.example.projectprepare1.ui.fond.FondListFragment"
+              android:label="fragment_fond_list" tools:layout="@layout/fragment_fond_list"/>
 </navigation>
