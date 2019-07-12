@@ -104,8 +104,9 @@ class PlayerFragment : Fragment() {
             //TODO:引用歌单
             var items=viewModel.getSongMenu()
             Log.d("save",items.size.toString()+" items szie  ")
-            var itemState= booleanArrayOf(false)
-            for(i in 0 until  items.size){
+            val itemState= BooleanArray(items.size)
+
+            for(i in 0 until  items.size-1){
                 itemState.set(i,false)
             }
             Log.d("save",itemState.size.toString()+" itemstate szie  ")
@@ -263,7 +264,7 @@ class PlayerFragment : Fragment() {
         }
         if(!intent.getStringExtra("songList").equals("0")){//匹配歌单
             listName=intent.getStringExtra("songList")
-            Log.d("temp","${listName}"+" listName")
+            Log.d("songList","${listName}"+"   listName")
             viewModel.setListNameList(listName)
         }
         if(!intent.getStringExtra("singer").equals("0")){//匹配歌手

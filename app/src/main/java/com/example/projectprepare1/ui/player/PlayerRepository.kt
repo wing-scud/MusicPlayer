@@ -25,12 +25,13 @@ import kotlinx.coroutines.launch
     }
     //设置播放歌单
    fun setMusicList(listName:String){
-      Log.d("next","${musicList?.value!!.size}"+"    repo  list")
+      Log.d("songList","${musicList?.value!!.size}"+"    repo  list")
         if(listName.equals("9999")){
             musicList?.value=dao.getAllSongs()
         }
         else{
-            musicList?.value=dao.getSongsForSonglist(listName)
+            var listId=dao.getListId(listName)
+            musicList?.value=dao.getSongsForSonglist(listId)
         }
    }
    fun setMusicListSinger(listName:String){
@@ -47,13 +48,12 @@ import kotlinx.coroutines.launch
          }
    }
    fun getSongMenu():Array<String>{
-      var list= arrayOf(String())
-      var listDouble=dao.getSongList()
+       var listDouble=dao.getSongList()
+      var list= Array(listDouble.size, {""})
        Log.d("save","${listDouble.size}"+" repo  listDouble size ")
       for(i in 0 until listDouble.size){
           Log.d("save","${listDouble[i].name!!}"+"  listDouble[i].name!! 1 ")
-          list.set(i,listDouble[i].name!!)
-          Log.d("save","${listDouble[i].name!!}"+"   listDouble[i].name!!  2 ")
+          list[i]=(listDouble[i].name!!)
       }
        Log.d("save","${list.size!!}"+"   listsize!!    ")
       return  list
