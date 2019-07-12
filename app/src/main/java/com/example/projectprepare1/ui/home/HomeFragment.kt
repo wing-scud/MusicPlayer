@@ -101,7 +101,7 @@ class HomeFragment : Fragment() {
                 },
                 MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
                     //data = listOP.deleteList(position)
-                    homeViewModel.deleteSongList(data[position].name!!, position)
+                    homeViewModel.deleteSongList(data[position].id!!, position)
                     data = homeViewModel.getSongList()
                 })
             recyclerView.adapter = myAdapter
