@@ -6,13 +6,6 @@
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.localmusic.LocalMusicFragment"
         android:orientation="vertical">
-    <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="本地音乐"
-            app:navigationIcon="@drawable/love"
-            android:id="@+id/local_music_toolbar">
-    </androidx.appcompat.widget.Toolbar>
     <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"

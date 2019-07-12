@@ -37,9 +37,6 @@ class LocalMusicFragment : Fragment() {
         val songList = homeViewModel.getSongList()
         pager.adapter = TabAdapter(childFragmentManager)
         tab.setupWithViewPager(pager)
-        local_music_toolbar.setNavigationOnClickListener{
-
-        }
 
     }
 

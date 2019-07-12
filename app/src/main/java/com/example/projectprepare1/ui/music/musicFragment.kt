@@ -1,6 +1,7 @@
 package com.example.projectprepare1.ui.music
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.roomwordssample.MusicRepository
 import com.example.android.roomwordssample.MusicRoomDatabase
+import com.example.projectprepare1.PlayerActivity
 import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
 import com.hfut.music.MusicAdapter
@@ -45,8 +47,12 @@ class MusicFragment : Fragment() {
         val adapter = MusicAdapter(context!!, R.layout.music_item,data,
             object : MyClickListener {
                 override fun onClick(position: Int) {
-                    musicReponsitory.musicList = "本地音乐"
-                    musicReponsitory.currentMusic = position
+                    val intent = Intent(context, PlayerActivity::class.java)
+                    intent.putExtra("local", "本地音乐")
+                    intent.putExtra("songList","0")
+                    intent.putExtra("singer","0")
+                    intent.putExtra("song", data[position].song)
+                    startActivity(intent)
                 }
             })
         music_lv.adapter = adapter
