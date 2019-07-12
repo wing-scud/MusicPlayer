@@ -29,7 +29,6 @@ class SingerAdapter (
             singerClickListener.onClick(position)
         }
     }
-
     override fun getItemCount(): Int {
         return data.size
     }

@@ -3,6 +3,7 @@ package com.example.projectprepare1.ui.music
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,20 +45,23 @@ class MusicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         musicViewModel = ViewModelProviders.of(this).get(MusicViewModel::class.java)
         val data = musicViewModel.getSongs()
-        val adapter = MusicAdapter(context!!, R.layout.music_item,data,
+        Log.d("temp","++++++++111")
+        val adapter = MusicAdapter(this.context!!, R.layout.music_item,data,
             object : MyClickListener {
                 override fun onClick(position: Int) {
+                    Log.d("temp","++++++++22")
                     val intent = Intent(context, PlayerActivity::class.java)
                     intent.putExtra("local", "本地音乐")
                     intent.putExtra("songList","0")
                     intent.putExtra("singer","0")
                     intent.putExtra("song", data[position].song)
+                    Log.d("temp","++++++++333")
                     startActivity(intent)
                 }
             })
         music_lv.adapter = adapter
         music_lv.layoutManager = LinearLayoutManager(context)
-        music_lv.layoutManager = GridLayoutManager(context, 1)
+        music_lv.layoutManager = GridLayoutManager(context, 1)!!
     }
 
 }

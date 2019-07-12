@@ -24,10 +24,12 @@ import com.example.projectprepare1.util.PlayerUtil.Companion.setNexFromPlayWay
 import com.example.projectprepare1.util.PlayerUtil.Companion.timeParse
 import com.hw.lrcviewlib.ILrcViewSeekListener
 import com.hw.lrcviewlib.LrcDataBuilder
+import kotlinx.android.synthetic.main.item_fragment.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.player_fragment.*
-
-
+import android.content.Intent
+import android.content.Intent.*
+import com.example.projectprepare1.PlayerActivity
 
 
 class PlayerFragment : Fragment() {
@@ -67,6 +69,11 @@ class PlayerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
+        var intent= activity?.intent
+        var temp=intent?.getStringExtra("song")
+        Log.d("temp","${temp}"+"  song")
+        if(temp!=null)
+            viewModel.setCurrentMusicName(temp)
         initMusic()
         val assets =context!!.assets
         var fromAsset = Typeface.createFromAsset(assets, "fonts/tff1.ttf");
@@ -80,29 +87,33 @@ class PlayerFragment : Fragment() {
             if(pause.value!!){
                 if(mediaPlayer?.isPlaying!!)
                 {
+                    playSong.setImageResource(R.drawable.play)
                     mediaPlayer?.pause()
                 }
             }
             else{
+                playSong.setImageResource(R.drawable.stop)
                 mediaPlayer?.start()
                 seekBarListen()
             }
-
         })
         addSongList.setOnClickListener {
             var dialog = android.app.AlertDialog.Builder(this.context)
             dialog.setTitle("收藏到的歌单")
             //TODO:引用歌单
-            var items:Array<String> = arrayOf("How", "Are", "You")
-            var itemState:BooleanArray= booleanArrayOf(false,false,false)
+            var items=viewModel.getSongMenu()
+           // var items:Array<String> = arrayOf("How", "Are", "You")
+            var itemState= booleanArrayOf()
+            for(i in 0 until  items.size){
+                itemState.set(i,false)
+            }
             dialog.setMultiChoiceItems(items,itemState,DialogInterface.OnMultiChoiceClickListener(){ dialogInterface: DialogInterface, i: Int, b: Boolean ->
                 itemState[i]=true
-
             })
             dialog.setPositiveButton("确定",DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
                 for(i in 0 until items.size){
                     if(itemState[i]==true){
-                        //TODO:添加到歌单中
+                        viewModel.addSongToList(items[i])
                     }
                 }
             })
@@ -112,12 +123,6 @@ class PlayerFragment : Fragment() {
         //播放按钮点击事件
         playSong.setOnClickListener{
             viewModel.setPause(!pause.value!!)
-            if(pause.value!!){
-                playSong.setImageResource(R.drawable.play)
-            }
-            else{
-                playSong.setImageResource(R.drawable.stop)
-            }
         }
         //进度条拖动
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -137,14 +142,14 @@ class PlayerFragment : Fragment() {
         })
         //切歌
         front.setOnClickListener {
+             viewModel.setPause(true)
               mediaPlayer?.reset()
-              viewModel.setPause(true)
               viewModel.setCurrentMusic(setAudioNext(1,currentMusic,musicListFra!!))
               initMusic()
         }
         next.setOnClickListener {
-            mediaPlayer?.reset()
             viewModel.setPause(true)
+            mediaPlayer?.reset()
             viewModel.setCurrentMusic(setAudioNext(-1,currentMusic,musicListFra!!))
             initMusic()
         }
@@ -157,12 +162,12 @@ class PlayerFragment : Fragment() {
         gramophoneView.setOnClickListener {
             gramophoneView.visibility = View.GONE
             au_lrcView.visibility = View.VISIBLE
-            Toast.makeText(this.context, "点击唱片，显示歌词", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(this.context, "点击唱片，显示歌词", Toast.LENGTH_SHORT).show()
         }
         au_lrcView.setOnClickListener {
             gramophoneView.visibility = View.VISIBLE
             au_lrcView.visibility = View.GONE
-            Toast.makeText(this.context, "点击歌词，显示专辑封面", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this.context, "点击歌词，显示专辑封面", Toast.LENGTH_SHORT).show()
         }
         playWayView.setOnClickListener {
             var playWay=viewModel.getPlayWay()
@@ -185,7 +190,7 @@ class PlayerFragment : Fragment() {
             Toast.makeText(context,str,Toast.LENGTH_SHORT).show()
 
         }
-        initLrc()
+        //initLrc()
     }
     private fun initMusic() {
         if(mediaPlayer==null)
@@ -199,10 +204,8 @@ class PlayerFragment : Fragment() {
         timePlay.text=timeParse(mediaPlayer?.duration!!.toLong())
         seekBar.max= mediaPlayer?.duration!!
         seekBar.progress=0
-       // Log.d("music", mediaPlayer?.duration.toString()+" duration1 ")
         musicName.text= musicListFra!![currentMusic].song
         musicSonger.text=musicListFra!![currentMusic].singer
-        //gramophoneView.setPictureRes(getResourceMusicImage(music.image))
     }
     private fun seekBarListen() {
         val thread = object : Thread() {
@@ -251,5 +254,26 @@ class PlayerFragment : Fragment() {
 
         au_lrcView.commitLrcSettings()
         au_lrcView.setLrcData(lrcRows)
+    }
+    private fun getListName(intent: Intent):String{
+        var listName=""
+        if(!intent.getStringExtra("local").equals("0")){//匹配本地音乐
+            //不做事
+        }
+        if(!intent.getStringExtra("songList").equals("0")){//匹配歌单
+            listName=intent.getStringExtra("songList")
+            viewModel.setListNameList(listName)
+        }
+        if(!intent.getStringExtra("singer").equals("0")){//匹配歌手
+            listName=intent.getStringExtra("singer")
+            viewModel.setListNameSinger(listName)
+        }
+        return listName;
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.setPause(true)
+        mediaPlayer?.release()
+        Log.d("bug","onDestroy")
     }
 }

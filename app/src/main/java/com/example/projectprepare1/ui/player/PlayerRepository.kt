@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.android.roomwordssample.MusicDao
-import com.example.android.roomwordssample.MusicRepository
-import com.example.android.roomwordssample.MusicRoomDatabase
-import com.example.android.roomwordssample.Song
+import com.example.android.roomwordssample.*
 import kotlinx.coroutines.launch
 
 
@@ -26,4 +23,33 @@ import kotlinx.coroutines.launch
     init {
        musicList =MutableLiveData(dao.getAllSongs())
     }
+   fun setMusicList(listName:String){
+      Log.d("next","${musicList?.value!!.size}"+"    repo  lsit")
+      musicList= MutableLiveData(dao.getSongsForSonglist(listName))
+   }
+   fun setMusicListSinger(listName:String){
+      musicList= MutableLiveData(dao.getSingerSongs(listName))
+   }
+   fun setCurrentMusic(name:String){
+      for(i in 0 until  musicList?.value!!.size){
+         if(name==musicList?.value!!.get(i).song) {
+            Log.d("next","${currentMusic}"+"  currrent ")
+            currentMusic=i
+         }
+         }
+   }
+   fun getSongMenu():Array<String>{
+      var list= arrayOf(String())
+      var listDouble=dao.getSongList()
+      for(i in 0 until listDouble.size){
+         list.set(i,listDouble[1].name!!)
+      }
+      return  list
+   }
+   fun addSongToList(current:Int,songListName:String){
+      var songId=musicList?.value!!.get(current).id
+      var  songListId=""
+     // var  songListId=dao.getSongListId(songListName)
+      dao.insertSonglistSongJoin(SonglistSongJoin(songId,songListId))
+   }
 }

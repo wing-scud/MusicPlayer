@@ -18,15 +18,15 @@ class MusicAdapter (
     val musicClickListener: MyClickListener
 ):RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var itemView = LayoutInflater.from(context).inflate(itemLayout,parent,false)
+        val itemView = LayoutInflater.from(context).inflate(itemLayout,parent,false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.musicName.text = data[position].song
         holder.singerName.text = data[position].singer
-        holder.menuIv.setOnClickListener{
-
+        holder.itemView.setOnClickListener {
+            musicClickListener.onClick(position)
         }
     }
 
@@ -36,7 +36,5 @@ class MusicAdapter (
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var musicName: TextView = itemView.local_music_name
         var singerName: TextView = itemView.local_music_singer
-        //var deleteBtn: Button = itemView.swip_delete_menu_btn
-        var menuIv: ImageView = itemView.local_music_item_never_menu
     }
 }
