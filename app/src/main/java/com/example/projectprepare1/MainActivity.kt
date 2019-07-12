@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()
-        var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
-        return NavHostFragment.findNavController(fragment).navigateUp();
+//        var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)!!;
+//        return NavHostFragment.findNavController(fragment).navigateUp();
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.action_settings ->{
-                Toast.makeText(this, "点击了选项", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent);
             }
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             else -> super.onOptionsItemSelected(item)
         }
     }
-    //下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？//下面函数没反应？？？
+//有反应了
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
@@ -98,7 +97,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 System.exit(0)
             }
         }
-        Toast.makeText(this, "点击了登陆", Toast.LENGTH_SHORT).show();
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
