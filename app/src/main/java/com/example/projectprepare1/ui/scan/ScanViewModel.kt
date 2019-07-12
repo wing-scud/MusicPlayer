@@ -14,10 +14,11 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
     var repository: ScanRepository
     object MusicUtils {
         var list = ArrayList<Song>()
-
+        var visiable = true
         fun getMusicData(context: Context){
             // 媒体库查询语句（写一个工具类MusicUtils）
             list= ArrayList()
+            visiable = true
             val cursor = context.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 null,
@@ -56,11 +57,16 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
                 }
                 // 释放资源
                 cursor.close()
+                visiable = false
             }
         }
         fun getList():List<Song>{
             return list
         }
+        fun getGifVisiable():Boolean{
+            return visiable
+        }
+
     }
     init {
        // val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()
@@ -72,6 +78,9 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
     }
     fun deleteAll(){
         repository.deleteAll()
+    }
+    fun getAllSongs():List<Song>{
+       return repository.getAllSongs()
     }
 
 }

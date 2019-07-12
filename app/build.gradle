@@ -23,6 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+    allprojects {
+        repositories {
+            mavenCentral()
+        }
+    }
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
@@ -53,4 +63,5 @@ dependencies {
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.0"
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.1'
 }
