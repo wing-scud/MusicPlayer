@@ -63,6 +63,6 @@ import kotlinx.coroutines.launch
        Log.d("save ","${songId}"+"       songId   repo ")
       var  songListId=dao.getListId(songListName)
        Log.d("save ","${songListId}"+"           songListId repo ")
-      dao.insertSonglistSongJoin(SonglistSongJoin(songId,songListId))
+      dao.insertSonglistSongJoin(SonglistSongJoin(songListId,songId))
    }
 }
