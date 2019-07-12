@@ -51,6 +51,7 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
                         var str=song.song!!.split(".")
                         Log.d("music",song.song!!+"str ")
                         if(str.size>1&&str[1].equals("mp3")){
+                            song.song=str[0].trim()
                             list.add(song)
                         }
                     }
@@ -81,6 +82,12 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
     }
     fun getAllSongs():List<Song>{
        return repository.getAllSongs()
+    }
+    fun insertSongList(){
+        repository.insertSongList()
+    }
+    fun insertSonglistSongJoin(list: List<Song>)= viewModelScope.launch {
+        repository.insertSonglistSongJoin(list)
     }
 
 }

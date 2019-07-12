@@ -49,11 +49,11 @@ class ScanFragment : Fragment() {
             scangif.visibility=View.VISIBLE
             Log.e("111","++++++++++++++++++++++++")
             scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
-            Thread(Runnable {
-                context?.let { it1 -> ScanViewModel.MusicUtils.getMusicData(it1) }
-                scanViewModel.deleteAll()
-                scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
-            }).start()
+            context?.let { it1 -> ScanViewModel.MusicUtils.getMusicData(it1) }
+            scanViewModel.deleteAll()
+            scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
+            scanViewModel.insertSongList()
+           
             completeScan.visibility=View.VISIBLE
             var temp=0
             var pause=true
@@ -85,6 +85,7 @@ class ScanFragment : Fragment() {
             tv2.visibility=View.VISIBLE
         }
         completeScan.setOnClickListener {
+            scanViewModel.insertSonglistSongJoin(ScanViewModel.MusicUtils.getList())
             findNavController().navigate(R.id.action_scanFragment_to_localMusicFragment)
         }
     }
