@@ -43,6 +43,8 @@ interface MusicDao {
     @Query("SELECT * FROM songlist_table")
     fun getSongList(): List<Songlist>
 
+    @Query("SELECT  id FROM songlist_table WHERE name = :listName")
+    fun getListId(listName: String):String
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSong(song: Song)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -68,7 +70,6 @@ interface MusicDao {
            WHERE songlist_song_join_table.songId LIKE :songId
            """)
     fun getSonglistsForSong(songId: String): Array<Songlist>
-
     @Query("""
            SELECT * FROM song_table
            INNER JOIN songlist_song_join_table

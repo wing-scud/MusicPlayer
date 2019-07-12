@@ -71,6 +71,7 @@ class PlayerFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
         var intent= activity?.intent
         var temp=intent?.getStringExtra("song")
+        getListName(intent!!)
         Log.d("temp","${temp}"+"  song")
         if(temp!=null)
             viewModel.setCurrentMusicName(temp)
@@ -102,11 +103,12 @@ class PlayerFragment : Fragment() {
             dialog.setTitle("收藏到的歌单")
             //TODO:引用歌单
             var items=viewModel.getSongMenu()
-           // var items:Array<String> = arrayOf("How", "Are", "You")
-            var itemState= booleanArrayOf()
+            Log.d("save",items.size.toString()+" items szie  ")
+            var itemState= booleanArrayOf(false)
             for(i in 0 until  items.size){
                 itemState.set(i,false)
             }
+            Log.d("save",itemState.size.toString()+" itemstate szie  ")
             dialog.setMultiChoiceItems(items,itemState,DialogInterface.OnMultiChoiceClickListener(){ dialogInterface: DialogInterface, i: Int, b: Boolean ->
                 itemState[i]=true
             })
@@ -129,10 +131,7 @@ class PlayerFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     mediaPlayer?.seekTo(progress)
-                 //   Log.d("music", mediaPlayer?.currentPosition!!.toString()+"  currentPosition")
                     timePlay.text=timeParse((mediaPlayer!!.duration - mediaPlayer?.currentPosition!!).toLong())
-//                    Log.d("music",seekBar.progress.toString()+"  seekBar.progress ")
-//                    Log.d("music",progress.toString()+"  .progress ")
                 }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -255,20 +254,23 @@ class PlayerFragment : Fragment() {
         au_lrcView.commitLrcSettings()
         au_lrcView.setLrcData(lrcRows)
     }
-    private fun getListName(intent: Intent):String{
+    private fun getListName(intent: Intent){
         var listName=""
         if(!intent.getStringExtra("local").equals("0")){//匹配本地音乐
-            //不做事
+            listName="9999"
+            Log.d("temp","bendi ")
+            viewModel.setListNameList(listName)
         }
         if(!intent.getStringExtra("songList").equals("0")){//匹配歌单
             listName=intent.getStringExtra("songList")
+            Log.d("temp","${listName}"+" listName")
             viewModel.setListNameList(listName)
         }
         if(!intent.getStringExtra("singer").equals("0")){//匹配歌手
             listName=intent.getStringExtra("singer")
+            Log.d("temp","${listName}"+"singer fra")
             viewModel.setListNameSinger(listName)
         }
-        return listName;
     }
     override fun onDestroy() {
         super.onDestroy()

@@ -1,6 +1,7 @@
 package com.example.projectprepare1.ui.player
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.roomwordssample.MusicRoomDatabase
 import com.example.android.roomwordssample.Song
@@ -17,7 +18,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
         val musicDao = MusicRoomDatabase.instance.musicDao()
         repo = PlayerRepository(musicDao)
         musicList=repo.musicList!!
-        currentMusic.value=repo.currentMusic
+        currentMusic=repo.currentMusic
         playWay.value=1
         pause.value=true
         volume.value=30
@@ -56,19 +57,26 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
     fun setVolume(volumeT:Int){
         volume.value=volumeT
     }
+    //设置播放列表  歌单
     fun setListNameList(listName:String){
         repo.setMusicList(listName)
     }
+    //设置播放列表  歌手
     fun setListNameSinger(listName:String){
         repo.setMusicListSinger(listName)
     }
+    //设置当前应该播放的歌
     fun setCurrentMusicName(name:String){
+        Log.d("temp","${name}")
         repo.setCurrentMusic(name)
     }
+    //得到所有的歌单
     fun getSongMenu():Array<String>{
+        Log.d("save","save")
         return repo.getSongMenu()
     }
     fun addSongToList(songListName:String){
+        Log.d("save","${currentMusic.value!!}"+ "   name   "+"${songListName}")
         repo.addSongToList(currentMusic.value!!,songListName)
     }
 }

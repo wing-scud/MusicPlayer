@@ -19,37 +19,50 @@ import kotlinx.coroutines.launch
 9*/
  class PlayerRepository (private val dao:MusicDao){
     var musicList: MutableLiveData<List<Song>>? =null//播放歌单
-    var currentMusic: Int?=0 //当前播放歌曲
+    var currentMusic=MutableLiveData(0) //当前播放歌曲
     init {
        musicList =MutableLiveData(dao.getAllSongs())
     }
+    //设置播放歌单
    fun setMusicList(listName:String){
-      Log.d("next","${musicList?.value!!.size}"+"    repo  lsit")
-      musicList= MutableLiveData(dao.getSongsForSonglist(listName))
+      Log.d("next","${musicList?.value!!.size}"+"    repo  list")
+        if(listName.equals("9999")){
+            musicList?.value=dao.getAllSongs()
+        }
+        else{
+            musicList?.value=dao.getSongsForSonglist(listName)
+        }
    }
    fun setMusicListSinger(listName:String){
-      musicList= MutableLiveData(dao.getSingerSongs(listName))
+       musicList?.value=dao.getSingerSongs(listName)
+       Log.d("next","${musicList?.value!!.size}"+"    repo  singer")
    }
    fun setCurrentMusic(name:String){
       for(i in 0 until  musicList?.value!!.size){
-         if(name==musicList?.value!!.get(i).song) {
-            Log.d("next","${currentMusic}"+"  currrent ")
-            currentMusic=i
+         if(name==musicList?.value!![i].song) {
+             currentMusic?.value=i
+             Log.d("temp ","${name}"+"  currrent  name  repo    ")
+            Log.d("temp ","${currentMusic.value}"+"  currrent repo    ")
          }
          }
    }
    fun getSongMenu():Array<String>{
       var list= arrayOf(String())
       var listDouble=dao.getSongList()
+       Log.d("save","${listDouble.size}"+" repo  listDouble size ")
       for(i in 0 until listDouble.size){
-         list.set(i,listDouble[1].name!!)
+          Log.d("save","${listDouble[i].name!!}"+"  listDouble[i].name!! 1 ")
+          list.set(i,listDouble[i].name!!)
+          Log.d("save","${listDouble[i].name!!}"+"   listDouble[i].name!!  2 ")
       }
+       Log.d("save","${list.size!!}"+"   listsize!!    ")
       return  list
    }
    fun addSongToList(current:Int,songListName:String){
       var songId=musicList?.value!!.get(current).id
-      var  songListId=""
-     // var  songListId=dao.getSongListId(songListName)
+       Log.d("save ","${songId}"+"       songId   repo ")
+      var  songListId=dao.getListId(songListName)
+       Log.d("save ","${songListId}"+"           songListId repo ")
       dao.insertSonglistSongJoin(SonglistSongJoin(songId,songListId))
    }
 }
