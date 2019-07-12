@@ -84,7 +84,6 @@ class ScanFragment : Fragment() {
             tv2.visibility=View.VISIBLE
         }
         completeScan.setOnClickListener {
-            scanViewModel.insertSonglistSongJoin(ScanViewModel.MusicUtils.getList())
             findNavController().navigate(R.id.action_scanFragment_to_localMusicFragment)
         }
     }

@@ -29,14 +29,7 @@ class ScanRepository (private val musicDao: MusicDao){
         data.addAll(musicDao.getAllSongs())
     }
     fun insertSongList(){
-        musicDao.insertSongList(Songlist("9999",("本地音乐")))
-        musicDao.insertSongList(Songlist("10000",("我的喜爱")))
+        musicDao.insertSongList(Songlist("1",("我的喜爱")))
     }
-    fun insertSonglistSongJoin(list: List<Song>) {
-        for (index in 0..list.size - 1) {
-            list[index].id = (index + 1).toString()
-            var songlistSongJoin = SonglistSongJoin("9999", list[index].id)
-            musicDao.insertSonglistSongJoin(songlistSongJoin)
-        }
-    }
+
 }

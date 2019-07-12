@@ -83,8 +83,6 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
     fun insertSongList(){
         repository.insertSongList()
     }
-    fun insertSonglistSongJoin(list: List<Song>)= viewModelScope.launch {
-        repository.insertSonglistSongJoin(list)
-    }
+
 
 }
