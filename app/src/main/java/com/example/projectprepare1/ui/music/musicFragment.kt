@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.roomwordssample.MusicRepository
@@ -62,6 +63,9 @@ class MusicFragment : Fragment() {
         music_lv.adapter = adapter
         music_lv.layoutManager = LinearLayoutManager(context)
         music_lv.layoutManager = GridLayoutManager(context, 1)!!
+        scan.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_localMusicFragment_to_scanFragment)
+        }
     }
 
 }

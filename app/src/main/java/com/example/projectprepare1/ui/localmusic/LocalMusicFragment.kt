@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.example.projectprepare1.R
 import com.example.projectprepare1.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_local_music.*
+import kotlinx.android.synthetic.main.fragment_music.*
 
 
 // TODO: Rename parameter arguments, choose names that match

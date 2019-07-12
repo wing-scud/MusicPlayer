@@ -85,7 +85,7 @@ class ScanFragment : Fragment() {
             tv2.visibility=View.VISIBLE
         }
         completeScan.setOnClickListener {
-            findNavController().navigate(R.id.action_scanFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_scanFragment_to_localMusicFragment)
         }
     }
 }
