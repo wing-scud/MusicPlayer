@@ -77,9 +77,6 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
      fun insertSong(list: List<Song>) = viewModelScope.launch {
         repository.insertSong(list)
     }
-    fun deleteAll(){
-        repository.deleteAll()
-    }
     fun getAllSongs():List<Song>{
        return repository.getAllSongs()
     }

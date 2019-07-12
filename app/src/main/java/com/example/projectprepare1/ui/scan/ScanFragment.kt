@@ -50,10 +50,9 @@ class ScanFragment : Fragment() {
             Log.e("111","++++++++++++++++++++++++")
             scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
             context?.let { it1 -> ScanViewModel.MusicUtils.getMusicData(it1) }
-            scanViewModel.deleteAll()
             scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
             scanViewModel.insertSongList()
-           
+
             completeScan.visibility=View.VISIBLE
             var temp=0
             var pause=true

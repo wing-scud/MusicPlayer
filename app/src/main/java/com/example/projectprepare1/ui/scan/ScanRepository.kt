@@ -11,11 +11,6 @@ import com.example.android.roomwordssample.SonglistSongJoin
 class ScanRepository (private val musicDao: MusicDao){
     var songs: MutableLiveData<List<Song>>? = null
     val data = mutableListOf<Song>()
-    fun deleteAll(){
-        Thread(Runnable {
-            musicDao.deleteAll()
-        }).start()
-    }
      fun insertSong(list: List<Song>) {
          Log.e("1111","-------"+list.size+"---------")
          Thread(Runnable {
