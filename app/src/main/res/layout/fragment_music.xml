@@ -5,13 +5,30 @@
              android:layout_height="match_parent"
              tools:context=".ui.music.MusicFragment"
             android:orientation="vertical">
-    <Button
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="扫描"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:id="@+id/scan"/>
+            android:layout_height="40dp"
+            android:background="#DDDDDD"
+            android:id="@+id/scan"
+            android:gravity="center">
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/scan_menu"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:text="扫描本地音乐"/>
+    </LinearLayout>
+    <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="扫描"-->
+            <!--android:textSize="20sp"-->
+            <!--android:gravity="center"-->
+            <!--android:id="@+id/scan"/>-->
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView

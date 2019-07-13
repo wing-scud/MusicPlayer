@@ -4,6 +4,7 @@ package com.example.projectprepare1.ui.home
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.graphics.Typeface
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import com.example.android.roomwordssample.Songlist
 import com.example.projectprepare1.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.input_list_name.*
+import kotlinx.android.synthetic.main.music_item.*
+import kotlinx.android.synthetic.main.singer_item.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -80,9 +83,9 @@ class HomeFragment : Fragment() {
                 .setPositiveButton("创建", DialogInterface.OnClickListener{ dialogInterface, ii ->//点击创建按钮事件
                     //data = listOP.addMusicList(listName.text.toString())
                     var id = 0
-                    if(data.isEmpty()){ id = 1}
+                    if(data.isEmpty()){ id = 2}
                     else {
-                        id = data[data.size - 1].id.toInt() + 1
+                        id = data[data.size-1].id.toInt() + 1
                     }
                     val songlist = Songlist(id.toString(),editText.text.toString())
                     homeViewModel.insertSongList(songlist)
@@ -101,14 +104,23 @@ class HomeFragment : Fragment() {
                 },
                 MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
                     //data = listOP.deleteList(position)
-                    homeViewModel.deleteSongList(data[position].id!!, position)
+                    homeViewModel.deleteSongList(data[position].id, position)
                     data = homeViewModel.getSongList()
                 })
             recyclerView.adapter = myAdapter
-
         })
+    }
 
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        val assets =context!!.assets
+        super.onActivityCreated(savedInstanceState)
+        val fromAsset = Typeface.createFromAsset(assets, "fonts/tff1.ttf");
+        home_local_music_tv.typeface = fromAsset
+        home_my_love_music_tv.typeface = fromAsset
+        newList.typeface=fromAsset
+//        local_music_name.typeface = fromAsset
+//        local_music_singer.typeface = fromAsset
+//        singer_name.typeface = fromAsset
     }
 
 

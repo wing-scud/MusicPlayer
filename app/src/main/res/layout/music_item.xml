@@ -84,19 +84,23 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        >
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/local_music_name"
-    android:textSize="24sp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:id="@+id/local_music_singer"
-    android:textSize="12sp"/>
+            android:textSize="16sp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/local_music_singer"
+            android:textColor="#C0C0C0"
+            android:textSize="12sp"/>
     <View
-    android:layout_width="match_parent"
-    android:layout_height="0.5dp"
-    android:layout_weight="0"
-    android:background="?attr/divider"></View>
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_weight="0"
+            android:background="?attr/divider"></View>
 
 </LinearLayout>
