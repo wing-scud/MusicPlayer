@@ -126,10 +126,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
             R.id.changecolor->{
-                beijing.setImageResource(R.drawable.bg1)
+                beijing.setImageResource(R.drawable.beijing2)
             }
             R.id.nav_about-> {
-
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent);
             }

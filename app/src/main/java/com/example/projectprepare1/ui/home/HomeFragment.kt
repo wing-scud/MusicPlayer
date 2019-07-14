@@ -60,9 +60,16 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         var data = homeViewModel.getSongList()
+        Log.e("aaa","-------${data}----------")
+//        data.get(0)
+        if(data.size >= 1) {
+            data = data.subList(1, data.size)
+        }
+        Log.e("aaa","-------${data}----------")
         val myAdapter = MyAdapter(data,
             MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
-                val songListId = data[position+1].id
+                val songListId = data[position].id
+                Log.e("aaa","-----!!!--${data}-----!!!-----")
                 val bundle = Bundle()
                 bundle.putString("listId", songListId)
                 findNavController().navigate(R.id.action_homeFragment_to_songInListFragment,bundle)
@@ -94,9 +101,13 @@ class HomeFragment : Fragment() {
             .show()
         }
         homeViewModel.songList.observe(this, Observer {
-            val myAdapter = MyAdapter(it,
+            if(data.size>= 1&&data[0].id=="1") {
+                data = data.subList(1, data.size)
+            }
+            val myAdapter = MyAdapter(data,
                 MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
-                    val songListId = data[position+1].id
+                    val songListId = data[position].id
+                    Log.e("aaa","-----!!!--${data}----------")
                     val bundle = Bundle()
                     bundle.putString("listId", songListId)
                     bundle.putString("songListName", data[position].name)
@@ -122,6 +133,5 @@ class HomeFragment : Fragment() {
 //        local_music_singer.typeface = fromAsset
 //        singer_name.typeface = fromAsset
     }
-
 
 }
