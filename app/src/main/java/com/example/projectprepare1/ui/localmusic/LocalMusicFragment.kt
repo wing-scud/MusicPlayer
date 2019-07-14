@@ -2,6 +2,7 @@ package com.example.projectprepare1.ui.localmusic
 
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.projectprepare1.R
 import com.example.projectprepare1.ui.home.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_local_music.*
 import kotlinx.android.synthetic.main.fragment_music.*
 
@@ -41,6 +43,7 @@ class LocalMusicFragment : Fragment() {
         tab.setupWithViewPager(pager)
 
     }
+
 
 
 }

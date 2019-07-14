@@ -80,6 +80,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+            var sharedPreferences=getSharedPreferences("temp",0)
+            var temp=sharedPreferences.getInt("key",0)
+            when(temp){
+                0->{
+                    beijing.setImageResource(R.drawable.bg3)
+                }
+                1-> {
+                    beijing.setImageResource(R.drawable.bg1)
+                }
+                2-> {
+                    beijing.setImageResource(R.drawable.bg)
+                }
+            }
+            recreate()
         }
     }
 
@@ -126,7 +140,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
             R.id.changecolor->{
-                beijing.setImageResource(R.drawable.beijing2)
+                var sharedPreferences=getSharedPreferences("temp",0)
+                var temp=sharedPreferences.getInt("key",0)
+                Log.d("bg",temp.toString())
+                if(temp==2){
+                    temp=0
+                }
+                else{
+                    temp++
+                }
+                sharedPreferences.edit().putInt("key",temp).commit()
+                when(temp){
+                    0->{
+                        beijing.setImageResource(R.drawable.bg3)
+                    }
+                    1-> {
+                        beijing.setImageResource(R.drawable.bg1)
+                    }
+                    2-> {
+                        beijing.setImageResource(R.drawable.bg)
+                    }
+                }
             }
             R.id.nav_about-> {
                 val intent = Intent(this, AboutActivity::class.java)

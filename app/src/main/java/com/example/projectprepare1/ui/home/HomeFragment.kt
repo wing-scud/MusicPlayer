@@ -57,7 +57,19 @@ class HomeFragment : Fragment() {
         }
 
         recyclerView.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL,false)
-
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                beijing.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                beijing.setImageResource(R.drawable.bg1)
+            }
+            2-> {
+                beijing.setImageResource(R.drawable.bg)
+            }
+        }
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         var data = homeViewModel.getSongList()
         Log.e("aaa","-------${data}----------")
