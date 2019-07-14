@@ -26,6 +26,7 @@ import com.example.projectprepare1.ui.scan.ScanPermissionUtils
 import com.example.projectprepare1.ui.scan.ScanRepository
 import com.example.projectprepare1.ui.scan.ScanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * fragment展示的容器
@@ -124,7 +125,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
-
+            R.id.changecolor->{
+                beijing.setImageResource(R.drawable.bg1)
+            }
             R.id.nav_about-> {
 
                 val intent = Intent(this, AboutActivity::class.java)
