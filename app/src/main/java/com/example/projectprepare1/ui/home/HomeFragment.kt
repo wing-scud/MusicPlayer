@@ -62,14 +62,14 @@ class HomeFragment : Fragment() {
         var data = homeViewModel.getSongList()
         val myAdapter = MyAdapter(data,
             MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
-                val songListId = data[position].id
+                val songListId = data[position+1].id
                 val bundle = Bundle()
                 bundle.putString("listId", songListId)
                 findNavController().navigate(R.id.action_homeFragment_to_songInListFragment,bundle)
             },
             MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
                 //data = listOP.deleteList(position)
-                homeViewModel.deleteSongList(data[position].id!!,position )
+                homeViewModel.deleteSongList(data[position+1].id!!,position )
                 data = homeViewModel.getSongList()
             })
         recyclerView.adapter = myAdapter
@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
         homeViewModel.songList.observe(this, Observer {
             val myAdapter = MyAdapter(it,
                 MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
-                    val songListId = data[position].id
+                    val songListId = data[position+1].id
                     val bundle = Bundle()
                     bundle.putString("listId", songListId)
                     bundle.putString("songListName", data[position].name)

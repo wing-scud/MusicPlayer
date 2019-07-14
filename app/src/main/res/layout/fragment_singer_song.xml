@@ -6,6 +6,12 @@
              tools:context=".ui.singersong.SingerSongFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:id="@+id/beijing5"
+               android:src="@drawable/beijing"
+               android:scaleType="centerCrop"
+    />
     <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
                                                android:layout_height="match_parent"
     android:id="@+id/singer_song_lv">
