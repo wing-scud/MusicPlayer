@@ -45,18 +45,5 @@ class ScanPermissionUtils(private val context: Activity) {
         }
         return true
     }
-    private fun isAllGranted(grantResults: IntArray): Boolean {
-        for (it in grantResults) {
-            if (it != PackageManager.PERMISSION_GRANTED) return false
-        }
-        return true
-    }
 
-    fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_CODE_PERMISSION) {
-            if (isAllGranted(grantResults))
-                mHasPermissionRunnable?.run()
-            else mNoPermissionRunnable?.run()
-        }
-    }
 }

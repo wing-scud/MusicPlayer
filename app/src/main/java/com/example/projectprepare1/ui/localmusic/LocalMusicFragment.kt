@@ -51,7 +51,6 @@ class LocalMusicFragment : Fragment() {
             }
         }
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val songList = homeViewModel.getSongList()
         pager.adapter = TabAdapter(childFragmentManager)
         tab.setupWithViewPager(pager)
 

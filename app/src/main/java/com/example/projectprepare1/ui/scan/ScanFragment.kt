@@ -47,7 +47,6 @@ class ScanFragment : Fragment() {
 
         scan.setOnClickListener {
             scangif.visibility=View.VISIBLE
-            Log.e("111","++++++++++++++++++++++++")
             scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
             context?.let { it1 -> ScanViewModel.MusicUtils.getMusicData(it1) }
             scanViewModel.insertSong(ScanViewModel.MusicUtils.getList())
@@ -71,7 +70,6 @@ class ScanFragment : Fragment() {
                         message.what = 1
                         message.arg1 = temp
                         handler.sendMessage(message)
-                        Log.e("222", "${temp}")
                     }
                     else{
                         var message = Message()

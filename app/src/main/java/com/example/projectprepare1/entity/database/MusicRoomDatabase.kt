@@ -19,14 +19,7 @@ package com.example.android.roomwordssample
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import android.content.Context
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.android.roomwordssample.MusicDao
-import com.example.android.roomwordssample.Song
-import com.example.android.roomwordssample.Songlist
 import com.example.projectprepare1.ItemApplication
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.

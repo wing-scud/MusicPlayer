@@ -49,7 +49,6 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
                             song.song = str[1]
                         }
                         var str=song.song!!.split(".")
-                        Log.d("music",song.song!!+"str ")
                         if(str.size>1&&str[1].equals("mp3")){
                             song.song=str[0].trim()
                             list.add(song)
@@ -64,10 +63,6 @@ class ScanViewModel (application: Application) : AndroidViewModel(application) {
         fun getList():List<Song>{
             return list
         }
-        fun getGifVisiable():Boolean{
-            return visiable
-        }
-
     }
     init {
        // val musicDao = MusicRoomDatabase.getDatabase(application, viewModelScope).musicDao()

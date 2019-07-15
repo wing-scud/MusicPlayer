@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.roomwordssample.MusicRepository
 import com.example.android.roomwordssample.MusicRoomDatabase
-import com.example.projectprepare1.PlayerActivity
+import com.example.projectprepare1.ui.player.PlayerActivity
 import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
 import com.hfut.music.MusicAdapter

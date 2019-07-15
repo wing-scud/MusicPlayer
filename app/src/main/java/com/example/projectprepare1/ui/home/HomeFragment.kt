@@ -141,9 +141,6 @@ class HomeFragment : Fragment() {
         home_local_music_tv.typeface = fromAsset
         home_my_love_music_tv.typeface = fromAsset
         newList.typeface=fromAsset
-//        local_music_name.typeface = fromAsset
-//        local_music_singer.typeface = fromAsset
-//        singer_name.typeface = fromAsset
     }
 
 }

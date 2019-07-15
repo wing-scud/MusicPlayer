@@ -12,11 +12,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.roomwordssample.MusicRoomDatabase
-import com.example.projectprepare1.PlayerActivity
+import com.example.projectprepare1.ui.player.PlayerActivity
 import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
 import com.hfut.music.MusicAdapter
+import kotlinx.android.synthetic.main.fragment_fond_list.*
+import kotlinx.android.synthetic.main.fragment_local_music.*
 import kotlinx.android.synthetic.main.fragment_singer_song.*
+import kotlinx.android.synthetic.main.fragment_song_in_list.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,7 +34,6 @@ private const val ARG_PARAM2 = "param2"
 class SingerSongFragment : Fragment() {
     private lateinit var singerSongViewModel: SingerSongViewModel
     val musicDao = MusicRoomDatabase.instance.musicDao()
-    var reponsitory = SingerSongReponsitory(musicDao)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,10 +45,21 @@ class SingerSongFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val singer = arguments?.getString("singerName")!!
-
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                beijing5.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                beijing5.setImageResource(R.drawable.beijing)
+            }
+            2-> {
+                beijing5.setImageResource(R.drawable.beijing2)
+            }
+        }
         singerSongViewModel = ViewModelProviders.of(this).get(SingerSongViewModel::class.java)
         val singerSong = singerSongViewModel.getSingerSong(singer)
-        Log.i("============",singerSong.toString())
         val adapter = MusicAdapter(context!!, R.layout.music_item, singerSong,
             object : MyClickListener {
                 override fun onClick(position: Int) {

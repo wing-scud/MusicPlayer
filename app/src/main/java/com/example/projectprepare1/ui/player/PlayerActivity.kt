@@ -1,11 +1,10 @@
-package com.example.projectprepare1
+package com.example.projectprepare1.ui.player
 
 import android.content.Intent
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
+import com.example.projectprepare1.R
 
 class PlayerActivity : AppCompatActivity() {
     private var value: Intent? = null

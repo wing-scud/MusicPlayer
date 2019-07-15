@@ -67,7 +67,6 @@ class PlayerFragment : Fragment() {
         var intent= activity?.intent
         var temp=intent?.getStringExtra("song")
         getListName(intent!!)
-        Log.d("temp","${temp}"+"  song")
         if(temp!=null)
             viewModel.setCurrentMusicName(temp)
         initMusic()
@@ -98,13 +97,11 @@ class PlayerFragment : Fragment() {
             dialog.setTitle("收藏到的歌单")
             //TODO:引用歌单
             var items=viewModel.getSongMenu()
-            Log.d("save",items.size.toString()+" items szie  ")
             val itemState= BooleanArray(items.size)
 
             for(i in 0 until  items.size-1){
                 itemState.set(i,false)
             }
-            Log.d("save",itemState.size.toString()+" itemstate szie  ")
             dialog.setMultiChoiceItems(items,itemState,DialogInterface.OnMultiChoiceClickListener(){ dialogInterface: DialogInterface, i: Int, b: Boolean ->
                 itemState[i]=true
             })

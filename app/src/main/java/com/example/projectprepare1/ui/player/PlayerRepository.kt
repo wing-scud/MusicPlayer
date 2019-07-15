@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
     }
     //设置播放歌单
    fun setMusicList(listName:String){
-      Log.d("songList","${musicList?.value!!.size}"+"    repo  list")
         if(listName.equals("9999")){
             musicList?.value=dao.getAllSongs()
         }
@@ -36,33 +35,25 @@ import kotlinx.coroutines.launch
    }
    fun setMusicListSinger(listName:String){
        musicList?.value=dao.getSingerSongs(listName)
-       Log.d("next","${musicList?.value!!.size}"+"    repo  singer")
    }
    fun setCurrentMusic(name:String){
       for(i in 0 until  musicList?.value!!.size){
          if(name==musicList?.value!![i].song) {
              currentMusic?.value=i
-             Log.d("temp ","${name}"+"  currrent  name  repo    ")
-            Log.d("temp ","${currentMusic.value}"+"  currrent repo    ")
          }
          }
    }
    fun getSongMenu():Array<String>{
        var listDouble=dao.getSongList()
       var list= Array(listDouble.size, {""})
-       Log.d("save","${listDouble.size}"+" repo  listDouble size ")
       for(i in 0 until listDouble.size){
-          Log.d("save","${listDouble[i].name!!}"+"  listDouble[i].name!! 1 ")
           list[i]=(listDouble[i].name!!)
       }
-       Log.d("save","${list.size!!}"+"   listsize!!    ")
       return  list
    }
    fun addSongToList(current:Int,songListName:String){
       var songId=musicList?.value!!.get(current).id
-       Log.d("save ","${songId}"+"       songId   repo ")
       var  songListId=dao.getListId(songListName)
-       Log.d("save ","${songListId}"+"           songListId repo ")
       dao.insertSonglistSongJoin(SonglistSongJoin(songListId,songId))
    }
 }

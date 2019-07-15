@@ -3,7 +3,6 @@ package com.example.projectprepare1.ui.fond
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projectprepare1.PlayerActivity
+import com.example.projectprepare1.ui.player.PlayerActivity
 
 import com.example.projectprepare1.R
 import com.example.projectprepare1.ui.localmusic.MyClickListener
-import com.example.projectprepare1.ui.songinlist.SongInListViewModel
 import com.hfut.music.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_fond_list.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_song_in_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

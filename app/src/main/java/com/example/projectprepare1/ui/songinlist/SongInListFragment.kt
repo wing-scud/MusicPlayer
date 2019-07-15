@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projectprepare1.PlayerActivity
+import com.example.projectprepare1.ui.player.PlayerActivity
 import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
 import com.hfut.music.MusicAdapter
-import kotlinx.android.synthetic.main.fragment_local_music.*
 import kotlinx.android.synthetic.main.fragment_song_in_list.*
 
 

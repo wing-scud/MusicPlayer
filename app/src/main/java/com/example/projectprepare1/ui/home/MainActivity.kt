@@ -1,4 +1,4 @@
-package com.example.projectprepare1
+package com.example.projectprepare1.ui.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,9 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
+import com.example.projectprepare1.ui.AboutActivity
+import com.example.projectprepare1.R
 import com.example.projectprepare1.ui.scan.ScanPermissionUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
@@ -35,28 +36,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         permissionUtils.checkStoragePermission(mHasPermissionRunnable)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
-//        val toolbar: Toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
-
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
-//
-//        val toolbar: Toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
-//
-//        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-//        val navView: NavigationView = findViewById(R.id.nav_view)
-//        val toggle = ActionBarDrawerToggle(
-//            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-//        )
+
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
@@ -104,33 +91,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-//            R.id.action_settings ->{
-//                val fragmentTransaction = beginTransaction()
-//                fragmentTransaction.replaceFragment(HomeFragment(), ScanFragment())
-//                val fragmentTransaction = beginTransaction()
-//                fragmentTransaction.replace(res, fragment);
-//                fragmentTransaction.commit();
-
-//                supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.nav_host_fragment, ScanFragment())
-//                    .commit()
-//                val intent = Intent(this, PlayerActivity::class.java)
-//                startActivity(intent);
-//            }
-//        }
         return true
-//            when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
+
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view itemFragment clicks here.
         when (item.itemId) {
-            R.id.changecolor->{
+            R.id.changecolor ->{
                 var sharedPreferences=getSharedPreferences("temp",0)
                 var temp=sharedPreferences.getInt("key",0)
                 Log.d("bg",temp.toString())
@@ -155,12 +124,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
                 }
             }
-            R.id.nav_about-> {
+            R.id.nav_about -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 intent.putExtra("temp",temp)
                 startActivity(intent)
             }
-            R.id.nav_out-> {
+            R.id.nav_out -> {
                 System.exit(0)
             }
         }

@@ -308,16 +308,12 @@ public class GramophoneView extends View {
      * 设置唱片旋转速度
      * @param diskRotateSpeed 旋转速度
      */
-    public void setDiskRotateSpeed(float diskRotateSpeed) {
-        this.diskRotateSpeed = diskRotateSpeed;
-    }
 
     /**
      * 设置图片资源id
      * @param resId 图片资源id
      */
     public void setPictureRes(int resId){
-        // Log.d("music",resId+"  resId");
         bitmap = getMusicPicBitmap(DEFAULT_PICTURE_RADIUS*2,resId);
         setBitmapRect(srcRect, dstRect);
         invalidate();

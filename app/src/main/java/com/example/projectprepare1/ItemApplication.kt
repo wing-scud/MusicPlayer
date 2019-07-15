@@ -24,7 +24,6 @@ class ItemApplication:Application() {
         super.onCreate()
         var sharedPreferences=getSharedPreferences("temp",0)
         sharedPreferences.edit().clear().commit()
-        Log.d("bg"," application")
         instance = this
     }
 }

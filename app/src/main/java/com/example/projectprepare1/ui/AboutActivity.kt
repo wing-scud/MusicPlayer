@@ -1,14 +1,9 @@
-package com.example.projectprepare1
+package com.example.projectprepare1.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Window
 import android.view.WindowManager
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.fragment_song_in_list.*
-import kotlinx.android.synthetic.main.nav_header_main.*
+import com.example.projectprepare1.R
 
 class AboutActivity : AppCompatActivity() {
 
@@ -29,9 +24,6 @@ class AboutActivity : AppCompatActivity() {
 
             }
         }
-//        next.setOnClickListener({
-//            val intent = Intent(this, About2Activity::class.java)
-//            startActivity(intent);
-//        })
+
     }
 }

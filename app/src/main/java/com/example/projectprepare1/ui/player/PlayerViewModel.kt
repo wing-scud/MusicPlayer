@@ -54,9 +54,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
     fun setPause(pauseT:Boolean){
         pause.value=pauseT
     }
-    fun setVolume(volumeT:Int){
-        volume.value=volumeT
-    }
     //设置播放列表  歌单
     fun setListNameList(listName:String){
         repo.setMusicList(listName)
@@ -67,16 +64,13 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application){
     }
     //设置当前应该播放的歌
     fun setCurrentMusicName(name:String){
-        Log.d("temp","${name}")
         repo.setCurrentMusic(name)
     }
     //得到所有的歌单
     fun getSongMenu():Array<String>{
-        Log.d("save","save")
         return repo.getSongMenu()
     }
     fun addSongToList(songListName:String){
-        Log.d("save","${currentMusic.value!!}"+ "   name   "+"${songListName}")
         repo.addSongToList(currentMusic.value!!,songListName)
     }
 }
