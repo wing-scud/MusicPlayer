@@ -1,5 +1,6 @@
 package com.example.projectprepare1.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.android.roomwordssample.MusicDao
 import com.example.android.roomwordssample.Songlist

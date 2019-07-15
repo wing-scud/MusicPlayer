@@ -7,12 +7,12 @@
         tools:context=".AboutActivity">
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/bg1"
+            android:layout_height="0dp" app:srcCompat="@drawable/bg1"
             android:id="@+id/bg" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0"
-            android:layout_marginStart="8dp"/>
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"
+            android:scaleType="centerCrop"/>
 
     <TextView
             android:text="雨女无瓜"
@@ -20,63 +20,54 @@
             android:layout_height="wrap_content"
             android:id="@+id/teamName" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="@+id/bg" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="@+id/bg"
             android:textAlignment="center" android:textSize="30sp"
-    />
+            app:layout_constraintHorizontal_bias="0.418"
+            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.89"/>
     <TextView
             android:text="成员介绍"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/teamTitle" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/teamImage"
-            android:textSize="18sp" android:textAlignment="viewStart" app:layout_constraintHorizontal_bias="0.12"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"/>
+            android:textSize="18sp" app:layout_constraintHorizontal_bias="0.096"
+            android:layout_marginBottom="28dp" app:layout_constraintBottom_toTopOf="@+id/textView3"
+            android:textAlignment="center"/>
     <TextView
-            android:layout_width="366dp"
-            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/textView6"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="280dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bg"
             android:text="      潘海庆，王学艺，杜朝阳"
-            android:textSize="18sp" android:layout_marginTop="40dp"
-            app:layout_constraintVertical_bias="0.052" app:layout_constraintTop_toBottomOf="@+id/teamImage"
-            app:layout_constraintHorizontal_bias="0.275"/>
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4" android:layout_marginBottom="8dp"/>
     <TextView
-            android:layout_width="366dp"
-            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/textView3"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="308dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bg"
             android:text="      林择旭，肖航，李艾义"
-            android:textSize="18sp" android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.01" app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintHorizontal_bias="0.275"/>
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"/>
     <TextView
-            android:layout_width="351dp"
-            android:layout_height="192dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="428dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bg"
-            android:text="       我们开发团队由6人组成，其中三位属于资深的android的开发人员，有着android开发数十年的经验，并且全部毕业于合肥工业大学，均来自于软件学院，属于安徽高等教育人才"
-            android:textSize="18sp" android:layout_marginTop="40dp"
-            app:layout_constraintVertical_bias="0.052" app:layout_constraintTop_toBottomOf="@+id/teamImage"
-    />
-    <!--<Button-->
-    <!--android:text="成员介绍"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/next" android:layout_marginTop="8dp"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/textView6" android:layout_marginBottom="8dp"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"-->
-    <!--android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"-->
-    <!--app:layout_constraintHorizontal_bias="1.0" app:layout_constraintVertical_bias="0.927"-->
-    <!--android:textAlignment="center" android:textSize="18sp"/>-->
+            android:text="      我们开发团队由6人组成，并且都是android的萌新开发人员，但对android有着强烈的热爱，此外我们来自于合肥工业大学，在软件学院学习，是安徽省高等教育人才"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toTopOf="@+id/teamTitle" android:layout_marginBottom="52dp"
+            android:textAlignment="textStart"/>
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline4"
+                                                android:orientation="horizontal"
+                                                app:layout_constraintGuide_percent="0.57"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

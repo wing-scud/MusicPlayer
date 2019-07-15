@@ -14,6 +14,7 @@ import com.example.projectprepare1.PlayerActivity
 import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.R
 import com.hfut.music.MusicAdapter
+import kotlinx.android.synthetic.main.fragment_local_music.*
 import kotlinx.android.synthetic.main.fragment_song_in_list.*
 
 
@@ -40,6 +41,19 @@ class SongInListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         songInListViewModel = ViewModelProviders.of(this).get(SongInListViewModel::class.java)
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                beijing6.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                beijing6.setImageResource(R.drawable.beijing)
+            }
+            2-> {
+                beijing6.setImageResource(R.drawable.beijing2)
+            }
+        }
         val listId = arguments?.getString("listId")!!
         val songListName = arguments?.getString("songListName")
         val song = songInListViewModel.getSongInList(listId)

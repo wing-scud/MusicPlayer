@@ -18,6 +18,7 @@ import com.example.projectprepare1.ui.localmusic.MyClickListener
 import com.example.projectprepare1.ui.songinlist.SongInListViewModel
 import com.hfut.music.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_fond_list.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_song_in_list.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,6 +42,19 @@ class FondListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                imageView2.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                imageView2.setImageResource(R.drawable.beijing)
+            }
+            2-> {
+                imageView2.setImageResource(R.drawable.beijing2)
+            }
+        }
         fondListViewModel = ViewModelProviders.of(this).get(FondListViewModel::class.java)
         val data = fondListViewModel.FondList("1")
         val adapter = MusicAdapter(context!!, R.layout.music_item, data,

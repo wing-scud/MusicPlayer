@@ -4,6 +4,7 @@ package com.example.projectprepare1.ui.home
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.graphics.Typeface
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import com.example.android.roomwordssample.Songlist
 import com.example.projectprepare1.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.input_list_name.*
+import kotlinx.android.synthetic.main.music_item.*
+import kotlinx.android.synthetic.main.singer_item.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,19 +57,38 @@ class HomeFragment : Fragment() {
         }
 
         recyclerView.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL,false)
-
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                beijing.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                beijing.setImageResource(R.drawable.beijing)
+            }
+            2-> {
+                beijing.setImageResource(R.drawable.beijing2)
+            }
+        }
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         var data = homeViewModel.getSongList()
+        Log.e("aaa","-------${data}----------")
+//        data.get(0)
+        if(data.size >= 1) {
+            data = data.subList(1, data.size)
+        }
+        Log.e("aaa","-------${data}----------")
         val myAdapter = MyAdapter(data,
             MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
                 val songListId = data[position].id
+                Log.e("aaa","-----!!!--${data}-----!!!-----")
                 val bundle = Bundle()
                 bundle.putString("listId", songListId)
                 findNavController().navigate(R.id.action_homeFragment_to_songInListFragment,bundle)
             },
             MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
                 //data = listOP.deleteList(position)
-                homeViewModel.deleteSongList(data[position].id!!,position )
+                homeViewModel.deleteSongList(data[position+1].id!!,position )
                 data = homeViewModel.getSongList()
             })
         recyclerView.adapter = myAdapter
@@ -80,9 +102,9 @@ class HomeFragment : Fragment() {
                 .setPositiveButton("创建", DialogInterface.OnClickListener{ dialogInterface, ii ->//点击创建按钮事件
                     //data = listOP.addMusicList(listName.text.toString())
                     var id = 0
-                    if(data.isEmpty()){ id = 1}
+                    if(data.isEmpty()){ id = 2}
                     else {
-                        id = data[data.size - 1].id.toInt() + 1
+                        id = data[data.size-1].id.toInt() + 1
                     }
                     val songlist = Songlist(id.toString(),editText.text.toString())
                     homeViewModel.insertSongList(songlist)
@@ -91,9 +113,13 @@ class HomeFragment : Fragment() {
             .show()
         }
         homeViewModel.songList.observe(this, Observer {
-            val myAdapter = MyAdapter(it,
+            if(data.size>= 1&&data[0].id=="1") {
+                data = data.subList(1, data.size)
+            }
+            val myAdapter = MyAdapter(data,
                 MyAdapter.OnClickEvent {position ->  //点击歌单跳转操作
                     val songListId = data[position].id
+                    Log.e("aaa","-----!!!--${data}----------")
                     val bundle = Bundle()
                     bundle.putString("listId", songListId)
                     bundle.putString("songListName", data[position].name)
@@ -101,15 +127,23 @@ class HomeFragment : Fragment() {
                 },
                 MyAdapter.OnClickEvent {position -> //点击删除操作,position是所删除的歌单序号
                     //data = listOP.deleteList(position)
-                    homeViewModel.deleteSongList(data[position].id!!, position)
+                    homeViewModel.deleteSongList(data[position].id, position)
                     data = homeViewModel.getSongList()
                 })
             recyclerView.adapter = myAdapter
-
         })
-
-
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        val assets =context!!.assets
+        super.onActivityCreated(savedInstanceState)
+        val fromAsset = Typeface.createFromAsset(assets, "fonts/tff1.ttf");
+        home_local_music_tv.typeface = fromAsset
+        home_my_love_music_tv.typeface = fromAsset
+        newList.typeface=fromAsset
+//        local_music_name.typeface = fromAsset
+//        local_music_singer.typeface = fromAsset
+//        singer_name.typeface = fromAsset
+    }
 
 }

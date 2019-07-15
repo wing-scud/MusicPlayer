@@ -1,6 +1,7 @@
 package com.example.projectprepare1
 
 import android.app.Application
+import android.util.Log
 import kotlin.properties.Delegates
 
 /**
@@ -21,7 +22,9 @@ class ItemApplication:Application() {
 
     override fun onCreate(){
         super.onCreate()
-
+        var sharedPreferences=getSharedPreferences("temp",0)
+        sharedPreferences.edit().clear().commit()
+        Log.d("bg"," application")
         instance = this
     }
 }

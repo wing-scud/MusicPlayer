@@ -24,13 +24,8 @@ import com.example.projectprepare1.util.PlayerUtil.Companion.setNexFromPlayWay
 import com.example.projectprepare1.util.PlayerUtil.Companion.timeParse
 import com.hw.lrcviewlib.ILrcViewSeekListener
 import com.hw.lrcviewlib.LrcDataBuilder
-import kotlinx.android.synthetic.main.item_fragment.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.player_fragment.*
 import android.content.Intent
-import android.content.Intent.*
-import com.example.projectprepare1.PlayerActivity
-
 
 class PlayerFragment : Fragment() {
      var mediaPlayer: MediaPlayer?=null
