@@ -37,6 +37,19 @@ class LocalMusicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var sharedPreferences=context!!.getSharedPreferences("temp",0)
+        var temp=sharedPreferences.getInt("key",0)
+        when(temp){
+            0->{
+                beijing2.setImageResource(R.drawable.bg3)
+            }
+            1-> {
+                beijing2.setImageResource(R.drawable.beijing)
+            }
+            2-> {
+                beijing2.setImageResource(R.drawable.beijing2)
+            }
+        }
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val songList = homeViewModel.getSongList()
         pager.adapter = TabAdapter(childFragmentManager)

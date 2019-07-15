@@ -64,10 +64,10 @@ class HomeFragment : Fragment() {
                 beijing.setImageResource(R.drawable.bg3)
             }
             1-> {
-                beijing.setImageResource(R.drawable.bg1)
+                beijing.setImageResource(R.drawable.beijing)
             }
             2-> {
-                beijing.setImageResource(R.drawable.bg)
+                beijing.setImageResource(R.drawable.beijing2)
             }
         }
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)

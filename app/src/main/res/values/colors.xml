@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#81B5E7</color>
+    <color name="colorPrimary1">#9F043172</color>
     <color name="colorPrimaryDark">#80B4E6</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBlack">#000000</color>
@@ -38,7 +39,7 @@
     <color name="kuanGreen">#4BAF4F</color>
     <color name="kuanGreen50">#B04BAF4F</color>
     <!--知乎蓝-->
-    <color name="zhihuBlue">#1F96F2</color>
+    <color name="zhihuBlue">#043172</color>
     <color name="zhihuBlue50">#B01F96F2</color>
     <!--哔哩粉-->
     <color name="biliPink">#FA7298</color>
@@ -50,7 +51,7 @@
     <color name="tengluoPurple">#B47DB4</color>
     <color name="tengluoPurple50">#B0B47DB4</color>
     <!--碧海蓝-->
-    <color name="seaBlue">#59b7c3</color>
+    <color name="seaBlue">#40A2DF</color>
     <color name="seaBlue50">#B059b7c3</color>
     <!--樱草绿-->
     <color name="grassGreen">#89c348</color>
